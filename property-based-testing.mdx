@@ -1,0 +1,391 @@
+import { Appear, Head, Image, Notes } from 'mdx-deck'
+import { Split, SplitRight, FullScreenCode } from 'mdx-deck/layouts'
+import { Caption, Mermaid, Overlay } from './components'
+
+export { theme } from './theme'
+
+<Head>
+  <title>More Tests, Less Work</title>
+</Head>
+
+# More Tests, Less Work
+
+<br />
+<hr />
+
+Pixels.Camp · March 22, 2019
+
+---
+
+## Luís Rodrigues
+
+[goblindegook.com](https://goblindegook.com)  
+[@goblindegook](https://twitter.com/goblindegook)
+
+---
+
+### 👷 Software engineer at Equal Experts.
+
+---
+
+### 👮 Test-driven development police.
+
+---
+
+## Why test?
+
+- Quality assurance
+- Regression prevention
+- Documentation
+- Design aid (TDD)
+
+---
+
+## How to test?
+
+- Compilation and type-checking
+- Static code analysis
+- Manual 😬
+- Automated 😌
+  - Example-based
+  - Generative
+
+---
+
+### Example-based testing
+
+- What cases are significant?
+- How much coverage is enough?
+- Are we maintaining irrelevant tests?
+- How much work would it take to change them?
+
+---
+
+### Property-based testing
+
+_Instead of individual cases, test general behaviour._
+
+---
+
+_This is not a call to throw out your existing tests._
+
+---
+
+### Generators
+
+Generate _mostly_ random values for use in tests.
+
+Before even thinking about properties,  
+the ability to generate inputs is already valuable.
+
+---
+
+### Common built-in generators
+
+- Integers (with optional range)
+- Floats (with optional range)
+- Strings (with optional size range)
+- Collections (with optional size range)
+- Functions
+
+---
+
+### Generator composition
+
+```js
+const email = fc.asciiString(1, 32).map(name => `${name}@equalexperts.com`)
+
+const person = fc.record({
+  firstName: fc.string(),
+  lastName: fc.string(),
+  age: fc.integer(0, 100),
+  email
+})
+```
+
+---
+
+### Filters
+
+Exclude certain values from the generated set.
+
+```js
+const person = fc.record({
+  name: fc.string(),
+  age: fc.integer(0, 100)
+})
+
+const adult = person.filter(p => p.age >= 18)
+```
+
+_Overly restrictive conditions will delay your tests._
+
+---
+
+## Properties of addition
+
+---
+
+### Properties of addition: Commutativity
+
+## x + y = y + x
+
+```js
+fc.assert(
+  fc.property(fc.float(), fc.float(), (a, b) => add(a, b) === add(b, a))
+)
+```
+
+---
+
+### Properties of addition: Associativity
+
+## (x + y) + z = x + (y + z)
+
+```js
+fc.assert(
+  fc.property(
+    fc.float(),
+    fc.float(),
+    fc.float(),
+    (a, b, c) => add(add(a, b), c) === add(a, add(b, c))
+  )
+)
+```
+
+---
+
+### Properties of addition: Null element
+
+## x + 0 = x
+
+```js
+fc.assert(fc.property(fc.float(), a => add(a, 0) === a))
+```
+
+---
+
+### Properties of addition: Successor
+
+## x + 1 > x
+
+```js
+fc.assert(fc.property(fc.float(), a => add(a, 1) > a))
+```
+
+---
+
+### Properties of addition: Inverse
+
+## -x + x = 0
+
+```js
+fc.assert(fc.property(fc.float(), a => add(-a, a) === 0))
+```
+
+---
+
+### Properties of addition: Distributivity
+
+## m &times; (x + y) = m &times; x + m &times; y
+
+```js
+fc.assert(
+  fc.property(
+    fc.float(),
+    fc.float(),
+    fc.float(),
+    (a, b, c) => a * add(b, c) === add(a * b, a * c)
+  )
+)
+```
+
+---
+
+## How to determine properties to test?
+
+---
+
+### Different paths, same goal
+
+<Mermaid
+  id="commutative"
+  content={`
+graph LR;
+  A["🔴"];
+  B[...];
+  C[...];
+  D["🔵"];
+  A-->|"f()"|B;
+  A-->|"g()"|C;
+  B-->|"g()"|D;
+  C-->|"f()"|D;
+`}
+/>
+
+_E.g._, commutativity, associativity.
+
+---
+
+### Roundtrip tests
+
+<Mermaid
+  id="inverse"
+  content={`
+graph LR;
+  A["🔴"];
+  B["🔵"];
+  A-->|"f()"|B;
+  B-->|"f'()"|A;
+`}
+/>
+
+_E.g._, serialisation/deserialisation, getters/setters.
+
+---
+
+### Invariants
+
+<Mermaid
+  id="invariance"
+  content={`
+graph LR;
+  A["🔵🔴⚪⚫"];
+  B["⚪🔴🔵⚫"];
+  A-->|"t()"|B;
+`}
+/>
+
+_E.g._, mapped collection length, sorting yields same elements and size.
+
+---
+
+### Idempotence
+
+<Mermaid
+  id="idempotence"
+  content={`
+graph LR;
+  A["⚪⚫⚪⚫⚫"];
+  B["⚪⚫"];
+  C["⚪⚫"];
+  A-->|"f()"|B;
+  B-.->|"f()"|C;
+`}
+/>
+
+_E.g._, setters, sorting, filters.
+
+---
+
+### Comparing implementations
+
+<Mermaid
+  id="reference"
+  content={`
+graph LR;
+  In[Generated inputs];
+  Out[Compare outputs];
+  testIn["🔴"];
+  refIn["🔴"];
+  testOut["🔵"];
+  refOut["🔵"];
+  In-->testIn;
+  In-->refIn;
+  subgraph System under test;
+  testIn-->testOut;
+  end;
+  subgraph Reference implementation;
+  refIn-->refOut;
+  end;
+  testOut-->Out;
+  refOut-->Out;
+`}
+/>
+
+_E.g._, naïve/optimised, single-/multi-threaded, legacy/refactor.
+
+---
+
+### Shrinkers
+
+Shrinkers exist for when a test fails.
+
+They find the smallest input that still fails the test.
+
+---
+
+### Arbitrary datetime (no shrink)
+
+```js
+const datetime = fc
+  .nat()
+  .map(n => new Date(n * 3600))
+  .noShrink()
+
+fc.assert(fc.property(datetime, d => d < new Date()))
+```
+
+```sh
+  ● Arbitrary datetime without shrink
+
+    Property failed after 2 tests
+    { seed: -2007068736, path: "1", endOnFailure: true }
+    Counterexample: [Fri Oct 16 2099 02:14:56 GMT+0100 (Western European Summer Time)]
+    Shrunk 0 time(s)
+    Got error: Property failed by returning false
+```
+
+---
+
+### Arbitrary datetime (with shrink)
+
+```js
+const datetime = fc.nat().map(n => new Date(n * 3600))
+
+fc.assert(fc.property(datetime, d => d < new Date()))
+```
+
+```sh
+  ● Arbitrary datetime with shrink
+
+    Property failed after 3 tests
+    { seed: 175478521, path: "2:1:1:1:4:6:8:14:17:18:19:21:24:26:27:27", endOnFailure: true }
+    Counterexample: [Tue Mar 12 2019 17:13:04 GMT+0000 (Western European Standard Time)]
+    Shrunk 15 time(s)
+    Got error: Property failed by returning false
+```
+
+---
+
+### Language support
+
+| Language    | Library         | Language       | Library              |
+| :---------- | --------------- | :------------- | -------------------- |
+| **Clojure** | test.check      | **JavaScript** | fast-check, JSVerify |
+| **Elixir**  | StreamData      | **Perl**       | Test::LectroTest     |
+| **Elm**     | elm-check       | **Python**     | Hypothesis           |
+| **F#**      | FsCheck         | **Scala**      | ScalaCheck           |
+| **Haskell** | QuickCheck      | **Swift**      | SwiftCheck           |
+| **Java**    | junit-quicktest | **TypeScript** | fast-check, JSVerify |
+
+---
+
+### Property-based testing
+
+- Better coverage via generated inputs.
+
+- Complements traditional example-based tests.
+
+  - Not practical as a full replacement.
+
+- You may have to change your testing approach.
+
+---
+
+That is all.
+
+# Thank you
+
+[goblindegook.com](https://goblindegook.com)  
+[@goblindegook](https://twitter.com/goblindegook)

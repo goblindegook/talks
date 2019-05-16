@@ -1,0 +1,22 @@
+{
+  "name": "@goblindegook/talks",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "mdx-deck",
+    "build": "mdx-deck build --no-html",
+    "pdf": "mdx-deck-export pdf"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@emotion/core": "^10.0.10",
+    "@emotion/styled": "^10.0.10",
+    "@mdx-deck/export": "^2.0.6",
+    "mdx-deck": "^2.0.6",
+    "mermaid": "^8.0.0",
+    "prettier": "^1.16.4"
+  }
+}

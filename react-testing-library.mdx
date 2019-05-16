@@ -1,0 +1,603 @@
+import { Appear, Head, Image, Notes } from 'mdx-deck'
+import { Split, SplitRight, FullScreenCode } from 'mdx-deck/layouts'
+import { Caption, Mermaid, Overlay } from './components'
+
+export { theme } from './theme'
+
+<Head>
+  <title>react-testing-library</title>
+</Head>
+
+# react-testing-library
+
+_Or, How I Learned to Stop Worrying and Love the DOM._
+
+<br />
+<hr />
+
+WordCamp Lisbon · May 18, 2019
+
+---
+
+export default SplitRight
+
+<Image width="50vw" src="./assets/react-testing-library/asshole.jpg" />
+
+## Luís Rodrigues
+
+[goblindegook.com](https://goblindegook.com)  
+[@goblindegook](https://twitter.com/goblindegook)
+
+---
+
+<Image src="./assets/react-testing-library/equal-experts-logo.png" />
+
+---
+
+### Frontend Testing
+
+---
+
+export default Split
+
+<Image src="./assets/react-testing-library/drake-no.jpg">
+  <Split>
+    <p />
+    <ul style={{ paddingLeft: '15vw' }}>
+      <li>Complicated setup</li>
+      <li>Tests break all the time</li>
+      <li>Difficult to change</li>
+      <li>Slow AF</li>
+    </ul>
+  </Split>
+</Image>
+
+---
+
+<Image src="./assets/react-testing-library/drake-yes.jpg">
+  <SplitRight>
+    <p />
+    <ul style={{ paddingLeft: '20vw' }}>
+      <li>Readable</li>
+      <li>Robust</li>
+      <li>Maintainable</li>
+      <li>Fast</li>
+    </ul>
+  </SplitRight>
+</Image>
+
+---
+
+## Enzyme
+
+---
+
+### Why Enzyme?
+
+- Readable
+- Convenient
+
+---
+
+### Why <u>not</u> Enzyme?
+
+Enzyme’s API encourages testing implementation details.
+
+<Notes>
+  Primarily shallow rendering. But also selection by component name and
+  component instance state and property inspection.
+</Notes>
+
+---
+
+### What is shallow rendering?
+
+---
+
+<Mermaid
+  id="component-tree"
+  content={`
+graph TD
+  Form-->FU(File Upload)
+  Form-->I(Input)
+  Form-->C(Checkbox)
+  Form-->SB(Submit Button)
+  FU-->N((Network Request))
+`}
+/>
+
+---
+
+<Mermaid
+  id="shallow-component-tree"
+  content={`
+graph TD
+  subgraph Shallow Render
+    Form-->FU(File Upload)
+    Form-->I(Input)
+    Form-->C(Checkbox)
+    Form-->SB(Submit Button)
+  end
+  FU-.->N((Network Request))
+  style SB fill:#eee,stroke:#333,stroke-width:1px,stroke-dasharray: 2, 2
+  style C fill:#eee,stroke:#333,stroke-width:1px,stroke-dasharray: 2, 2
+  style I fill:#eee,stroke:#333,stroke-width:1px,stroke-dasharray: 2, 2
+  style FU fill:#eee,stroke:#333,stroke-width:1px,stroke-dasharray: 2, 2
+  style N fill:#eee,stroke:#333,stroke-width:1px,stroke-dasharray: 5, 5
+`}
+/>
+
+<Notes>
+  Allows ‘testing a component as a unit’, and ensures tests aren’t indirectly
+  asserting on behavior of child components.
+</Notes>
+
+---
+
+## Testing implementation details is a problem
+
+---
+
+<Mermaid
+  id="shallow-component-tree-broken"
+  content={`
+graph TD
+  subgraph Shallow Render
+    Form-->FS(Fieldset)
+    Form-->SB(Submit Button)
+  end
+  FS-.->FU(File Upload)
+  FS-.->I(Input)
+  FS-.->C(Checkbox)
+  FU-.->N((Network Request))
+  style FS fill:#eee,stroke:#333,stroke-width:1px,stroke-dasharray: 2, 2
+  style SB fill:#eee,stroke:#333,stroke-width:1px,stroke-dasharray: 2, 2
+  style C fill:#eee,stroke:#333,stroke-width:1px,stroke-dasharray: 5, 5
+  style I fill:#eee,stroke:#333,stroke-width:1px,stroke-dasharray: 5, 5
+  style FU fill:#eee,stroke:#333,stroke-width:1px,stroke-dasharray: 5, 5
+  style N fill:#eee,stroke:#333,stroke-width:1px,stroke-dasharray: 5, 5
+`}
+/>
+
+<Notes>
+  It limits your ability to refactor. If tests are constantly breaking for no
+  good reason, you’ll stop testing.
+</Notes>
+
+---
+
+Tests with shallow rendering are prone to break  
+when components or component structure change,  
+even if presentation and behaviour remains the same.
+
+<Notes>Brittleness</Notes>
+
+---
+
+‘Does this mean we have to write integration tests and not unit tests?’
+
+---
+
+<Image size="contain" src="./assets/react-testing-library/test-pyramid.png" />
+
+---
+
+A unit test must run in isolation.
+
+A unit test must focus on a small part of the system.
+
+A unit test must be fast.
+
+<Notes>
+  The definitions of ‘unit test’ and ‘integration test’ are a bit wishy-washy,
+  but a few things we can agree on.
+</Notes>
+
+---
+
+#### An isolated unit does not mean...
+
+- Test every single isolated function.
+- Test every single isolated class.
+- Test every single isolated component.
+
+---
+
+The _unit_ is whatever makes sense,  
+tested at a level that makes sense.
+
+---
+
+#### In test-driven development...
+
+- Tests are written before an implementation exists.
+- It doesn’t matter how many subcomponents it takes to implement it.
+- It doesn’t matter _which_ subcomponents implement it.
+
+<Notes>A different way to look at it.</Notes>
+
+---
+
+As long as the interface does not change, when I refactor a module,  
+<u>tests should not break</u>.
+
+<Notes>
+  Refactoring is one of the most important approaches to tackling tech debt. You
+  don’t want to have your hands tied here.
+</Notes>
+
+---
+
+Your unit tests based on shallow rendering are green...  
+but the application is broken.
+
+<Notes>
+  <p>Tests are missing their purpose</p>
+  <p>Changing potentially untested subcomponents.</p>
+  <p>Third-party components break but tests never exercise them.</p>
+</Notes>
+
+---
+
+‘But I don’t want to test third-party components!’
+
+<Notes>This makes as much sense as mocking Lodash in tests.</Notes>
+
+---
+
+You still need to be sure the application works.
+
+<Notes>
+  <p>
+    What’s the point of having all green unit tests if some untested component
+    or integration breaks the application?
+  </p>
+  <p>
+    Don’t fake or mock components unless you’re doing it to avoid a) shared
+    state that breaks test isolation, b) slowness, c) setup complexity, or d)
+    unpredictability.
+  </p>
+  <p>If it’s easier, faster and simpler to not mock, why not do it?</p>
+</Notes>
+
+---
+
+#### Again, in test-driven development...
+
+- Write a test to drive the implementation or integration.
+- Do whatever makes the test pass.
+- Again, it doesn’t matter _which_ components implement the feature.
+
+---
+
+## react-testing-library
+
+<a href='testing-library.com'>testing-library.com</a>
+
+---
+
+> “The more your tests resemble the way your software is used,  
+> the more confidence they can give you.”
+>
+> — Kent C. Dodds
+
+---
+
+Depends on JSDOM, otherwise test-runner–agnostic.
+
+---
+
+Provides a set of primitives that mimic user interaction.
+
+---
+
+### General queries
+
+- `getByText()`
+- `getByTitle()`
+- `getByAltText()`
+- `getByRole()`
+
+<Notes>
+  <p>Search by text or RegExp.</p>
+  <p>No CSS selectors, you see what the user sees.</p>
+  <p>Link or button? Doesn’t matter!</p>
+</Notes>
+
+---
+
+### Form fields queries
+
+- `getByLabelText()`
+- `getByDisplayValue()`
+- `getByPlaceholderText()`
+
+---
+
+### Escape hatch
+
+- `getByTestId()`
+
+<Notes>
+  <p>Last resort if all else fails.</p>
+  <p>Does not overload other IDs or classes for testing.</p>
+</Notes>
+
+---
+
+`getBy*`  
+finds first, fails test if not found.
+
+`getAllBy*`  
+finds all, fails test if not found.
+
+---
+
+`queryBy*`  
+finds first, returns `null` if not found.
+
+`queryAllBy*`  
+finds all, returns `[]` if not found.
+
+---
+
+`findBy*`  
+finds first asynchronously, rejects if not found.
+
+`findAllBy*`  
+finds all asynchronously, rejects if not found.
+
+---
+
+What you get back is DOM nodes.
+
+<Notes>
+  <p>No wrappers around React components.</p>
+  <p>
+    Rewrite with Vue and vue-testing-library and you’ll barely need to touch
+    tests.
+  </p>
+</Notes>
+
+---
+
+### Firing events
+
+```javascript
+fireEvent.click(getByText('Click me!'))
+```
+
+---
+
+### Examples
+
+---
+
+```javascript
+test('simple', () => {
+  const { getByLabelText } = render(
+    <>
+      <label htmlFor="test">Test</label>
+      <input id="test" value="Initial" />
+    </>
+  )
+
+  expect(getByLabelText('Test').value).toBe('Initial')
+})
+```
+
+---
+
+```javascript
+test('user interaction', () => {
+  const onSubmit = jest.fn()
+  const { getByText } = render(<Profile onSubmit={onSubmit} />)
+
+  fireEvent.click(getByText('Save'))
+
+  expect(onSubmit).toHaveBeenCalledTimes(1)
+})
+```
+
+---
+
+```javascript
+test('wait for animation', () => {
+  const data = testProfileData({ id: '9999' })
+  const handleDelete = jest.fn()
+  const { getByText, findByText } = render(
+    <Profile data={data} onDelete={handleDelete} />
+  )
+
+  fireEvent.click(getByText(/Delete/i))
+  fireEvent.click(await findByText(/Confirm/i))
+
+  await wait(() => expect(handleDelete).toHaveBeenCalledWith('9999'))
+})
+```
+
+---
+
+```javascript
+const Title = () => <FormattedMessage {...messages.title} />
+
+function renderWithIntl(ui) {
+  return render(<IntlProvider messages={messages}>{ui}</IntlProvider>)
+}
+
+test('i18n with custom renderer', () => {
+  const { getByTestId, getByText } = renderWithIntl(<Title />)
+  getByText(messages.title.defaultMessage)
+})
+```
+
+---
+
+### Cleanup
+
+```json
+{
+  "setupFilesAfterEnv": [
+    "react-testing-library/cleanup-after-each"
+    // Other setup scripts...
+  ]
+}
+```
+
+---
+
+Encourages not testing implementation details.
+
+---
+
+Encourages good accessibility practices.
+
+<Notes>
+  By not providing CSS node selectors, it encourages adoption of clear,
+  unambiguous labels, titles and alt text.
+</Notes>
+
+---
+
+Simple and lightweight.
+
+---
+
+## Challenges
+
+---
+
+### Combinatorial explosion
+
+<Notes>Having to write many similar tests for all possible outputs.</Notes>
+
+---
+
+### Brittleness
+
+<Notes>When one change breaks multiple tests.</Notes>
+
+---
+
+### Unhelpful feedback
+
+<Notes>
+  When a failing higher-level test doesn't tell you where the problem is.
+</Notes>
+
+---
+
+### Setup complexity
+
+---
+
+#### @react-mock
+
+- Component state
+- XHR requests
+- Fetch requests
+- LocalStorage
+
+---
+
+```javascript
+function renderWithState(ui, state) {
+  return render(<StateMock state={state}>{ui}</StateMock>)
+}
+
+test('mock component state with @react-mock/state', async () => {
+  const { getByText } = renderWithState(<Counter />, { count: 1000 })
+
+  fireEvent.click(getByText('Increment'))
+  await waitForElement(() => getByText(/clicked 1001 times/i))
+})
+```
+
+---
+
+#### It goes without saying\*
+
+Mocking internal state representation  
+counts as testing implementation details.
+
+###### \* But I'm saying it anyway.
+
+---
+
+```javascript
+function renderWithState(ui, state) {
+  const store = createStore(reducer, state)
+  return render(<Provider store={store}>{ui}</Provider>)
+}
+
+test('mock Redux state', () => {
+  const { getByText } = renderWithState(<Counter />, { count: 1000 })
+
+  fireEvent.click(getByText('Increment'))
+  await waitForElement(() => getByText(/clicked 1001 times/i))
+})
+```
+
+---
+
+[react-testing-examples.com](https://react-testing-examples.com)
+
+---
+
+### Framework-agnostic
+
+- dom-testing-library
+
+---
+
+### Frontend-specific
+
+- @angular-extensions/testing-library
+- preact-testing-library
+- svelte-testing-library
+- vue-testing-library
+
+---
+
+### Other testing tools
+
+- cypress-testing-library
+- pptr-testing-library
+- testcafe-testing-library
+
+### Native
+
+- native-testing-library
+
+---
+
+## I ❤️ \*-testing-library
+
+- Delightful API
+- Discourages testing implementation details
+- Encourages accessible components
+
+But don’t let love blind you.
+
+---
+
+<Image size="contain" src="./assets/react-testing-library/test-pyramid.png" />
+
+<Notes>
+  <p>Not a silver bullet.</p>
+  <p>Consider the tradeoffs.</p>
+  <p>
+    The further up the render tree you go, and the further up the pyramid you
+    go, the more careful you’ll have to be to avoid duplication, brittleness,
+    and ambiguity.
+  </p>
+</Notes>
+
+---
+
+That is all.
+
+# Thank you
+
+[goblindegook.com](https://goblindegook.com)  
+[@goblindegook](https://twitter.com/goblindegook)
