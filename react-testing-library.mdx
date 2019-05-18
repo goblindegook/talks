@@ -295,6 +295,10 @@ Provides a set of primitives that mimic user interaction.
 
 ---
 
+export default Split
+
+<div>
+
 ### General queries
 
 - `getByText()`
@@ -302,19 +306,19 @@ Provides a set of primitives that mimic user interaction.
 - `getByAltText()`
 - `getByRole()`
 
-<Notes>
-  <p>Search by text or RegExp.</p>
-  <p>No CSS selectors, you see what the user sees.</p>
-  <p>Link or button? Doesn’t matter!</p>
-</Notes>
-
----
+</div>
 
 ### Form fields queries
 
 - `getByLabelText()`
 - `getByDisplayValue()`
 - `getByPlaceholderText()`
+
+<Notes>
+  <p>Search by text or RegExp.</p>
+  <p>No CSS selectors, you see what the user sees.</p>
+  <p>Link or button? Doesn’t matter!</p>
+</Notes>
 
 ---
 
@@ -326,30 +330,6 @@ Provides a set of primitives that mimic user interaction.
   <p>Last resort if all else fails.</p>
   <p>Does not overload other IDs or classes for testing.</p>
 </Notes>
-
----
-
-`getBy*`  
-finds first, fails test if not found.
-
-`getAllBy*`  
-finds all, fails test if not found.
-
----
-
-`queryBy*`  
-finds first, returns `null` if not found.
-
-`queryAllBy*`  
-finds all, returns `[]` if not found.
-
----
-
-`findBy*`  
-finds first asynchronously, rejects if not found.
-
-`findAllBy*`  
-finds all asynchronously, rejects if not found.
 
 ---
 
@@ -373,35 +353,7 @@ fireEvent.click(getByText('Click me!'))
 
 ---
 
-### Examples
-
----
-
-```javascript
-test('simple', () => {
-  const { getByLabelText } = render(
-    <>
-      <label htmlFor="test">Test</label>
-      <input id="test" value="Initial" />
-    </>
-  )
-
-  expect(getByLabelText('Test').value).toBe('Initial')
-})
-```
-
----
-
-```javascript
-test('user interaction', () => {
-  const onSubmit = jest.fn()
-  const { getByText } = render(<Profile onSubmit={onSubmit} />)
-
-  fireEvent.click(getByText('Save'))
-
-  expect(onSubmit).toHaveBeenCalledTimes(1)
-})
-```
+### Example
 
 ---
 
@@ -417,21 +369,6 @@ test('wait for animation', () => {
   fireEvent.click(await findByText(/Confirm/i))
 
   await wait(() => expect(handleDelete).toHaveBeenCalledWith('9999'))
-})
-```
-
----
-
-```javascript
-const Title = () => <FormattedMessage {...messages.title} />
-
-function renderWithIntl(ui) {
-  return render(<IntlProvider messages={messages}>{ui}</IntlProvider>)
-}
-
-test('i18n with custom renderer', () => {
-  const { getByTestId, getByText } = renderWithIntl(<Title />)
-  getByText(messages.title.defaultMessage)
 })
 ```
 
@@ -471,19 +408,19 @@ Simple and lightweight.
 
 ---
 
-### Combinatorial explosion
+Combinatorial explosion.
 
 <Notes>Having to write many similar tests for all possible outputs.</Notes>
 
 ---
 
-### Brittleness
+Brittleness.
 
 <Notes>When one change breaks multiple tests.</Notes>
 
 ---
 
-### Unhelpful feedback
+Unhelpful feedback.
 
 <Notes>
   When a failing higher-level test doesn't tell you where the problem is.
@@ -491,40 +428,7 @@ Simple and lightweight.
 
 ---
 
-### Setup complexity
-
----
-
-#### @react-mock
-
-- Component state
-- XHR requests
-- Fetch requests
-- LocalStorage
-
----
-
-```javascript
-function renderWithState(ui, state) {
-  return render(<StateMock state={state}>{ui}</StateMock>)
-}
-
-test('mock component state with @react-mock/state', async () => {
-  const { getByText } = renderWithState(<Counter />, { count: 1000 })
-
-  fireEvent.click(getByText('Increment'))
-  await waitForElement(() => getByText(/clicked 1001 times/i))
-})
-```
-
----
-
-#### It goes without saying\*
-
-Mocking internal state representation  
-counts as testing implementation details.
-
-###### \* But I'm saying it anyway.
+Setup complexity.
 
 ---
 
@@ -580,12 +484,6 @@ test('mock Redux state', () => {
 - Delightful API
 - Discourages testing implementation details
 - Encourages accessible components
-
-But don’t let love blind you.
-
----
-
-<Image size="contain" src="./assets/react-testing-library/test-pyramid.png" />
 
 <Notes>
   <p>Not a silver bullet.</p>
