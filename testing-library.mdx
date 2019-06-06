@@ -5,23 +5,23 @@ import { Caption, Mermaid, Overlay } from './components'
 export { theme } from './theme'
 
 <Head>
-  <title>react-testing-library</title>
+  <title>@testing-library</title>
 </Head>
 
-# react-testing-library
+# @testing-library
 
 _Or, How I Learned to Stop Worrying and Love the DOM._
 
 <br />
 <hr />
 
-WordCamp Lisbon · May 18, 2019
+Expert Talks · June 5, 2019
 
 ---
 
 export default SplitRight
 
-<Image width="50vw" src="./assets/react-testing-library/asshole.jpg" />
+<Image width="50vw" src="./assets/testing-library/asshole.jpg" />
 
 ## Luís Rodrigues
 
@@ -30,21 +30,17 @@ export default SplitRight
 
 ---
 
-<Image src="./assets/react-testing-library/equal-experts-logo.png" />
+<Image src="./assets/testing-library/equal-experts-logo.png" />
 
 ---
 
-<Image src="./assets/react-testing-library/wordpress-react.jpeg" />
-
----
-
-### Testing React components with confidence
+### Testing frontend components with confidence
 
 ---
 
 export default Split
 
-<Image src="./assets/react-testing-library/drake-no.jpg">
+<Image src="./assets/testing-library/drake-no.jpg">
   <Split>
     <p />
     <ul style={{ paddingLeft: '15vw' }}>
@@ -58,7 +54,7 @@ export default Split
 
 ---
 
-<Image src="./assets/react-testing-library/drake-yes.jpg">
+<Image src="./assets/testing-library/drake-yes.jpg">
   <SplitRight>
     <p />
     <ul style={{ paddingLeft: '20vw' }}>
@@ -69,6 +65,10 @@ export default Split
     </ul>
   </SplitRight>
 </Image>
+
+---
+
+_Examples in React, but applies to &lt;insert your framework here&gt;._
 
 ---
 
@@ -182,7 +182,7 @@ even if presentation and behaviour remains the same.
 
 ---
 
-<Image size="contain" src="./assets/react-testing-library/test-pyramid.png" />
+<Image size="contain" src="./assets/testing-library/test-pyramid.png" />
 
 ---
 
@@ -274,9 +274,7 @@ You still need to be sure the application works.
 
 ---
 
-## react-testing-library
-
-<a href='testing-library.com'>testing-library.com</a>
+## [testing-library.com](https://testing-library.com)
 
 ---
 
@@ -379,7 +377,7 @@ test('wait for animation', () => {
 ```json
 {
   "setupFilesAfterEnv": [
-    "react-testing-library/cleanup-after-each"
+    "@testing-library/react/cleanup-after-each"
     // Other setup scripts...
   ]
 }
@@ -448,38 +446,39 @@ test('mock Redux state', () => {
 
 ---
 
-[react-testing-examples.com](https://react-testing-examples.com)
+[testing-examples.com](https://testing-examples.com)
 
 ---
 
 ### Framework-agnostic
 
-- dom-testing-library
+- @testing-library/dom
 
 ---
 
 ### Frontend-specific
 
-- @angular-extensions/testing-library
+- @testing-library/angular
+- @testing-library/react
+- @testing-library/svelte
+- @testing-library/vue
 - preact-testing-library
-- svelte-testing-library
-- vue-testing-library
 
 ---
 
 ### Other testing tools
 
-- cypress-testing-library
+- @testing-library/cypress
+- @testing-library/testcafe
 - pptr-testing-library
-- testcafe-testing-library
 
 ### Native
 
-- native-testing-library
+- @testing-library/native
 
 ---
 
-## I ❤️ react-testing-library
+## I ❤️ testing-library
 
 - Delightful API
 - Discourages testing implementation details
