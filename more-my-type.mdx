@@ -147,8 +147,14 @@ function Hello (props: HelloProps) {
 * Destructuring
 * Generators
 * `async`/`await`
-* Optional chaning
+* Optional chaining
 * Nullish coalescence
+
+TODO: Layout
+
+<Notes>
+  TypeScript is a superset of ECMAScript.
+</Notes>
 
 ---
 
@@ -162,11 +168,6 @@ function Hello (props: HelloProps) {
 * `void`, `null`, `undefined`
 * `never`
 * `unknown`
-* Type unions and intersections
-* Nullable types
-* Read-only types
-* Interfaces
-* Generics
 
 ---
 
@@ -176,19 +177,35 @@ TODO: Example
 
 ---
 
-## Class features
-
-* Encapsulation
-* Interfaces
-* Mixins
+## Nullable types
 
 TODO: Example
 
 ---
 
-## Modules
+## Read-only types
 
-Many third-party modules aren't typed. Now what?
+TODO: Example
+
+---
+
+## Interfaces
+
+TODO: Example, interfaces vs types
+
+## Generics
+
+TODO: Example
+
+---
+
+## Class features
+
+TODO: Example
+
+---
+
+_Many JavaScript modules don't come with types. Now what?_
 
 ---
 
@@ -244,22 +261,18 @@ As of 2019, you can also compile TypeScript with Babel.
 
 ---
 
-### Migration
+### Incremental Migration
 
-* Applications may be migrated incrementally.
 * JavaScript compiles as TypeScript without changes.
-* Ensure dependencies provide types or that they exist on Definitely Typed.
-* Semi-automated tools (ReSharper by JetBrains).
-* Loose compiler settings at the start, strict settings to complete migration.
-* Leverage Babel.
+* TypeScript without TypeScript: typechecking with JSDoc comments.
+* Leverage your existing Babel setup.
+* Begin with looser compiler settings, turn on stricter settings as you approach completion.
 
 ---
 
-### TypeScript without using TypeScript
+### Automated migration
 
-Use JSDoc comments for type checking.
-
-TODO: Demo.
+* Semi-automated tools (ReSharper by JetBrains).
 
 ---
 
