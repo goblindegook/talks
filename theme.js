@@ -1,5 +1,5 @@
 import { book, syntaxHighlighterPrism } from 'mdx-deck/themes'
-import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { prism } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 export const theme = syntaxHighlighterPrism({
   ...book,
@@ -50,6 +50,9 @@ export const theme = syntaxHighlighterPrism({
     }
   },
   prism: {
-    style: okaidia
+    style: prism,
+    customStyle: {
+      backgroundColor: '#fafafa'
+    }
   }
 })

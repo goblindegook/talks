@@ -1,0 +1,371 @@
+import { Head, Image, Notes } from 'mdx-deck'
+import { Split, SplitRight, FullScreenCode } from 'mdx-deck/layouts'
+
+export { theme } from './theme'
+
+<Head>
+  <title>More My Type</title>
+</Head>
+
+`undefined is not a function`
+
+---
+
+# More My Type
+
+_React applications in TypeScript_
+
+<br />
+
+Tech Along · January 30, 2020
+
+---
+
+<SplitRight>
+<Image width="50vw" src="./assets/more-my-type/asshole.jpg" />
+
+## Luís Rodrigues
+
+[goblindegook.com](https://goblindegook.com)  
+[@goblindegook](https://twitter.com/goblindegook)
+</SplitRight>
+
+---
+
+<Image src="./assets/more-my-type/equal-experts-logo.png" />
+
+---
+
+## Types to the rescue
+
+---
+
+## Types in React
+
+PropTypes _vs_ Flow _vs_ TypeScript
+
+---
+
+<Split>
+
+## PropTypes
+
+* `prop-types` on NPM.
+* Runtime validation.
+* React components only.
+
+</Split>
+
+<Notes>
+  <p>Remember to disable PropTypes in production because performance.</p>
+</Notes>
+
+---
+
+```jsx
+import React from 'react'
+import PropTypes from 'prop-types'
+
+function Hello (props) {
+  return <h1>Hello, {props.name}</h1>
+}
+
+Hello.propTypes = {
+  name: PropTypes.string.isRequired
+}
+```
+
+---
+
+<Split>
+
+## Flow
+
+* Typechecking utility.
+* Types stripped on compilation.
+* Supports PropTypes.
+
+</Split>
+
+---
+
+```jsx
+import React from 'react'
+
+type HelloProps = {
+  name: string
+}
+
+function Hello (props: HelloProps) {
+  return <h1>Hello, {props.name}</h1>
+}
+```
+
+---
+
+<Split>
+
+## TypeScript
+
+* Programming language.
+* Compiles to JavaScript.
+* Typechecks at compile time.
+
+</Split>
+
+---
+
+```tsx
+import React from 'react'
+
+type HelloProps = {
+  name: string
+}
+
+function Hello (props: HelloProps) {
+  return <h1>Hello, {props.name}</h1>
+}
+```
+
+<Notes>
+  It looks the same but I promise you Flow and TypeScript are different.
+</Notes>
+
+---
+
+## Focus on TypeScript
+
+---
+
+## All the ECMAScript features you know and love
+
+* Classes
+* Modules
+* Arrow functions
+* Default parameters
+* Rest parameters
+* Destructuring
+* Generators
+* `async`/`await`
+* Optional chaning
+* Nullish coalescence
+
+---
+
+## JSX is supported too, of course (as TSX)
+
+---
+
+## Just add types
+
+* Basic: `boolean`, `number`, `string`, `Array`, tuples, `enum`, `any`
+* `void`, `null`, `undefined`
+* `never`
+* `unknown`
+* Type unions and intersections
+* Nullable types
+* Read-only types
+* Interfaces
+* Generics
+
+---
+
+## Type unions
+
+TODO: Example
+
+---
+
+## Class features
+
+* Encapsulation
+* Interfaces
+* Mixins
+
+TODO: Example
+
+---
+
+## Modules
+
+Many third-party modules aren't typed. Now what?
+
+---
+
+## Definitely Typed
+
+Install typings for third-party modules from the `@types` organization.
+
+`npm install --save-dev @types/react`
+
+---
+
+## Demo Time
+
+TODO
+
+---
+
+## Building
+
+---
+
+### Client side: Webpack
+
+`ts-loader` or `awesome-typescript-loader`
+
+<Notes>
+  ATL adds compiler cache and typechecks in parallel with compilation.
+</Notes>
+
+---
+
+### Client side: Rollup
+
+TODO
+
+---
+
+### Server side: `tsc`
+
+Just use the TypeScript compiler.
+
+Develop in the Node environment with `ts-node`.
+
+---
+
+### Babel is not required
+
+As of 2019, you can also compile TypeScript with Babel.
+
+---
+
+## Migrating JavaScript Applications
+
+---
+
+### Migration
+
+* Applications may be migrated incrementally.
+* JavaScript compiles as TypeScript without changes.
+* Ensure dependencies provide types or that they exist on Definitely Typed.
+* Semi-automated tools (ReSharper by JetBrains).
+* Loose compiler settings at the start, strict settings to complete migration.
+* Leverage Babel.
+
+---
+
+### TypeScript without using TypeScript
+
+Use JSDoc comments for type checking.
+
+TODO: Demo.
+
+---
+
+## Recommendations
+
+---
+
+### Recommendation: `noImplicitAny`
+
+When a value type can't be inferred, TypeScript assigns it the `any` type.
+
+`any` defeats the purpose of having a type checker.
+
+<Notes>
+Compiler option.
+</Notes>
+
+---
+
+### Recommendation: `strictNullChecks`
+
+Disallowing `null` value assignment prevents an entire class of errors.
+
+`null` and `undefined` can still be explicitly allowed.
+
+<Notes>
+Compiler option.
+</Notes>
+
+---
+
+### ESLint
+
+Performs static code analysis.
+
+Customizable with reasonable defaults.
+
+---
+
+### Let type inference do its work
+
+Don't bother typing local variable declarations unless you have to.
+
+Always add types to function and method signatures instead.
+
+---
+
+### Prefer function overloading over union types
+
+Overloading is more readable than type unions.
+
+---
+
+```tsx
+function length(value: string | any[]): number {
+  return value.length
+}
+
+function length(value: string): number
+function length(value: any[]): number {
+  return value.length
+}
+```
+
+---
+
+## Pain Points
+
+---
+
+### Third-party module is missing type definitions
+
+* Roll your own type definitions.
+* Contribute back to Definitely Typed.
+* Import modules with no type definition.
+
+---
+
+### Compilation time
+
+* Incremental builds.
+* `awesome-typescript-loader`.
+* Optimised watch mode for tests.
+
+---
+
+### It's still JavaScript in the end
+
+* No runtime typechecks.
+* No performance boost from static types.
+
+---
+
+## Why bother?
+
+* Catch common errors like type invariance or null values at compilation time or on the IDE itself.
+* Refactoring super powers.
+* No need to write tests where types are asserted.
+* Function signatures act like documentation.
+* Sweet, sweet code autocompletion.
+
+---
+
+That is all.
+
+# Thank you
+
+[goblindegook.com](https://goblindegook.com)  
+[@goblindegook](https://twitter.com/goblindegook)
