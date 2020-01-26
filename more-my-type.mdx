@@ -89,7 +89,7 @@ Hello.propTypes = {
 
 ---
 
-```jsx
+```tsx
 import React from 'react'
 
 type HelloProps = {
@@ -312,7 +312,7 @@ Customizable with reasonable defaults.
 
 ---
 
-### Let type inference do its work
+### Let type inference do its work
 
 Don't bother typing local variable declarations unless you have to.
 
@@ -326,7 +326,7 @@ Overloading is more readable than type unions.
 
 ---
 
-```tsx
+```ts
 function length(value: string | any[]): number {
   return value.length
 }
@@ -343,7 +343,7 @@ function length(value: any[]): number {
 
 ---
 
-### Third-party module is missing type definitions
+### Third-party module is missing type definitions
 
 * Roll your own type definitions.
 * Contribute back to Definitely Typed.
@@ -351,7 +351,7 @@ function length(value: any[]): number {
 
 ---
 
-### Compilation time
+### Compilation time
 
 * Incremental builds.
 * `awesome-typescript-loader`.
