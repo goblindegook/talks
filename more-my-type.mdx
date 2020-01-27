@@ -36,7 +36,7 @@ Tech Along · January 30, 2020
 
 ---
 
-## Types to the rescue
+_Types to the rescue!_
 
 ---
 
@@ -46,15 +46,11 @@ PropTypes _vs_ Flow _vs_ TypeScript
 
 ---
 
-<Split>
-
 ## PropTypes
 
 * `prop-types` on NPM.
 * Runtime validation.
 * React components only.
-
-</Split>
 
 <Notes>
   <p>Remember to disable PropTypes in production because performance.</p>
@@ -77,15 +73,11 @@ Hello.propTypes = {
 
 ---
 
-<Split>
-
 ## Flow
 
 * Typechecking utility.
 * Types stripped on compilation.
 * Supports PropTypes.
-
-</Split>
 
 ---
 
@@ -103,15 +95,11 @@ function Hello (props: HelloProps) {
 
 ---
 
-<Split>
-
 ## TypeScript
 
 * Programming language.
 * Compiles to JavaScript.
 * Typechecks at compile time.
-
-</Split>
 
 ---
 
@@ -133,24 +121,32 @@ function Hello (props: HelloProps) {
 
 ---
 
-## Focus on TypeScript
+_Let's focus on TypeScript._
 
 ---
 
-## All the ECMAScript features you know and love
+### All the ECMAScript features you know and love
+
+<Split>
+<div>
 
 * Classes
 * Modules
 * Arrow functions
 * Default parameters
 * Rest parameters
+
+</div>
+<div>
+
 * Destructuring
 * Generators
 * `async`/`await`
 * Optional chaining
 * Nullish coalescence
 
-TODO: Layout
+</div>
+</Split>
 
 <Notes>
   TypeScript is a superset of ECMAScript.
@@ -158,7 +154,7 @@ TODO: Layout
 
 ---
 
-## JSX is supported too, of course (as TSX)
+_JSX is supported too, of course (as TSX)._
 
 ---
 
@@ -171,55 +167,169 @@ TODO: Layout
 
 ---
 
-## Type unions
+### Nullable types
 
-TODO: Example
+```tsx
+function getYear(date?: Date) {
+  return date.getFullYear() // Error
+}
 
----
-
-## Nullable types
-
-TODO: Example
-
----
-
-## Read-only types
-
-TODO: Example
+function getYear(date?: Date) {
+  if (date != null) {
+    return date.getFullYear() // OK
+  }
+}
+```
 
 ---
 
-## Interfaces
+### Read-only types
 
-TODO: Example, interfaces vs types
+```tsx
+function addItem(
+  list: readonly string[],
+  item: string
+): readonly string[] {
+  // OK:
+  return list.concat(item)
 
-## Generics
-
-TODO: Example
-
----
-
-## Class features
-
-TODO: Example
-
----
-
-_Many JavaScript modules don't come with types. Now what?_
+  // Error:
+  list.push(item)
+  return list
+}
+```
 
 ---
 
-## Definitely Typed
+### Generics
 
-Install typings for third-party modules from the `@types` organization.
-
-`npm install --save-dev @types/react`
+```tsx
+function addItem<T>(
+  list: readonly T[],
+  item: T
+): readonly T[] {
+  return list.concat(item)
+}
+```
 
 ---
 
-## Demo Time
+<Split>
+<div>
 
-TODO
+### Interfaces
+
+```tsx
+interface Person {
+  name: string
+  age: number
+}
+```
+
+</div>
+<div>
+
+### Type Aliases
+
+```tsx
+type Person = {
+  name: string
+  age: number
+}
+```
+
+</div>
+</Split>
+
+---
+
+Mostly the same effect, except:
+
+* Interfaces have a name;
+* Interfaces support circular definitions;
+* Classes may implement interfaces;
+* Interfaces cannot mixin multiple interfaces.
+
+---
+
+_When in doubt, use_ `interface`_._
+
+---
+
+### Class features
+
+```ts
+class Meetup implements Event {
+  constructor (private name: string) {}
+
+  greet() {
+    return `Hello, ＄{this.name}!`
+  }
+}
+
+const meetup = new Meetup('Hack Along')
+
+meetup.name // Error
+```
+
+---
+
+### Intersection types
+
+```ts
+interface Item {
+  name: string
+  sku: string
+}
+
+interface Perishable {
+  expires: Date
+}
+
+type FoodItem = Item & Perishable
+```
+
+---
+
+### Union types
+
+```ts
+interface Bird {
+  kind: 'bird'
+  fly()
+  layEggs()
+}
+
+interface Fish {
+  kind: 'fish'
+  swim()
+  layEggs()
+}
+
+type Pet = Bird | Fish
+```
+
+---
+
+### Type guards
+
+```ts
+function isBird(pet: Pet): pet is Bird {
+  return pet.kind === 'bird'
+}
+
+if (isBird(somePet)) {
+  somePet.fly()
+}
+```
+
+---
+
+_Type-checking Redux actions with_ `typescript-fsa`_._
+
+<Notes>
+  Demo.
+</Notes>
 
 ---
 
@@ -253,7 +363,19 @@ Develop in the Node environment with `ts-node`.
 
 ### Babel is not required
 
-As of 2019, you can also compile TypeScript with Babel.
+_(But as of 2019, you can also compile TypeScript with Babel.)_
+
+---
+
+_Many JavaScript modules don't come with types. Now what?_
+
+---
+
+## Definitely Typed
+
+Install typings for third-party modules from the `@types` organization.
+
+`npm install @types/react`
 
 ---
 
@@ -263,10 +385,14 @@ As of 2019, you can also compile TypeScript with Babel.
 
 ### Incremental Migration
 
-* JavaScript compiles as TypeScript without changes.
-* TypeScript without TypeScript: typechecking with JSDoc comments.
-* Leverage your existing Babel setup.
+* JavaScript compiles as TypeScript without changes;
+* TypeScript without TypeScript: typechecking with JSDoc comments;
+* Leverage your existing Babel setup;
 * Begin with looser compiler settings, turn on stricter settings as you approach completion.
+
+---
+
+TODO: Demo JSDoc
 
 ---
 
@@ -343,7 +469,7 @@ function length(value: any[]): number {
 
 ---
 
-### Third-party module is missing type definitions
+### Third-party modules missing type definitions
 
 * Roll your own type definitions.
 * Contribute back to Definitely Typed.
