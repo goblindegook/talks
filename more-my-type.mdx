@@ -1,6 +1,6 @@
 import { Head, Image, Notes } from 'mdx-deck'
-import { Split, SplitRight, FullScreenCode } from 'mdx-deck/layouts'
-
+import { SplitRight, FullScreenCode } from 'mdx-deck/layouts'
+import { Layout, Split } from './components/Layout'
 export { theme } from './theme'
 
 <Head>
@@ -36,15 +36,25 @@ Tech Along · January 30, 2020
 
 ---
 
+<Layout>
+
 _Types to the rescue!_
 
+</Layout>
+
 ---
+
+<Layout>
 
 ## Types in React
 
 PropTypes _vs_ Flow _vs_ TypeScript
 
+</Layout>
+
 ---
+
+<Layout>
 
 ## PropTypes
 
@@ -56,7 +66,11 @@ PropTypes _vs_ Flow _vs_ TypeScript
   <p>Remember to disable PropTypes in production because performance.</p>
 </Notes>
 
+</Layout>
+
 ---
+
+<Layout>
 
 ```jsx
 import React from 'react'
@@ -71,7 +85,11 @@ Hello.propTypes = {
 }
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ## Flow
 
@@ -79,7 +97,11 @@ Hello.propTypes = {
 * Types stripped on compilation.
 * Supports PropTypes.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ```tsx
 import React from 'react'
@@ -93,7 +115,11 @@ function Hello (props: HelloProps) {
 }
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ## TypeScript
 
@@ -101,7 +127,11 @@ function Hello (props: HelloProps) {
 * Compiles to JavaScript.
 * Typechecks at compile time.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ```tsx
 import React from 'react'
@@ -119,11 +149,19 @@ function Hello (props: HelloProps) {
   It looks the same but I promise you Flow and TypeScript are different.
 </Notes>
 
+</Layout>
+
 ---
+
+<Layout>
 
 _Let's focus on TypeScript._
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### All the ECMAScript features you know and love
 
@@ -152,11 +190,19 @@ _Let's focus on TypeScript._
   TypeScript is a superset of ECMAScript.
 </Notes>
 
+</Layout>
+
 ---
+
+<Layout>
 
 _JSX is supported too, of course (as TSX)._
 
+</Layout>
+
 ---
+
+<Layout>
 
 ## Just add types
 
@@ -165,7 +211,11 @@ _JSX is supported too, of course (as TSX)._
 * `never`
 * `unknown`
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Nullable types
 
@@ -181,15 +231,17 @@ function getYear(date?: Date) {
 }
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Read-only types
 
 ```tsx
-function addItem(
-  list: readonly string[],
-  item: string
-): readonly string[] {
+function addItem(list: readonly string[],
+                 item: string): readonly string[] {
   // OK:
   return list.concat(item)
 
@@ -199,20 +251,26 @@ function addItem(
 }
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Generics
 
 ```tsx
-function addItem<T>(
-  list: readonly T[],
-  item: T
-): readonly T[] {
+function addItem<T>(list: readonly T[],
+                    item: T): readonly T[] {
   return list.concat(item)
 }
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 <Split>
 <div>
@@ -241,7 +299,11 @@ type Person = {
 </div>
 </Split>
 
+</Layout>
+
 ---
+
+<Layout>
 
 Mostly the same effect, except:
 
@@ -250,21 +312,21 @@ Mostly the same effect, except:
 * Classes may implement interfaces;
 * Interfaces cannot mixin multiple interfaces.
 
----
-
 _When in doubt, use_ `interface`_._
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Class features
 
 ```ts
 class Meetup implements Event {
   constructor (private name: string) {}
-
-  greet() {
-    return `Hello, ＄{this.name}!`
-  }
+  
+  greet() { return `Hello, ＄{this.name}!` }
 }
 
 const meetup = new Meetup('Hack Along')
@@ -272,7 +334,11 @@ const meetup = new Meetup('Hack Along')
 meetup.name // Error
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Intersection types
 
@@ -289,7 +355,11 @@ interface Perishable {
 type FoodItem = Item & Perishable
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Union types
 
@@ -309,7 +379,11 @@ interface Fish {
 type Pet = Bird | Fish
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Type guards
 
@@ -323,7 +397,11 @@ if (isBird(somePet)) {
 }
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 _Type-checking Redux actions with_ `typescript-fsa`_._
 
@@ -331,11 +409,19 @@ _Type-checking Redux actions with_ `typescript-fsa`_._
   Demo.
 </Notes>
 
+</Layout>
+
 ---
+
+<Layout>
 
 ## Building
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Client side: Webpack
 
@@ -345,13 +431,21 @@ _Type-checking Redux actions with_ `typescript-fsa`_._
   ATL adds compiler cache and typechecks in parallel with compilation.
 </Notes>
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Client side: Rollup
 
 TODO
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Server side: `tsc`
 
@@ -359,17 +453,29 @@ Just use the TypeScript compiler.
 
 Develop in the Node environment with `ts-node`.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Babel is not required
 
 _(But as of 2019, you can also compile TypeScript with Babel.)_
 
+</Layout>
+
 ---
+
+<Layout>
 
 _Many JavaScript modules don't come with types. Now what?_
 
+</Layout>
+
 ---
+
+<Layout>
 
 ## Definitely Typed
 
@@ -377,34 +483,107 @@ Install typings for third-party modules from the `@types` organization.
 
 `npm install @types/react`
 
----
-
-## Migrating JavaScript Applications
+</Layout>
 
 ---
 
-### Incremental Migration
+<Layout>
 
-* JavaScript compiles as TypeScript without changes;
-* TypeScript without TypeScript: typechecking with JSDoc comments;
-* Leverage your existing Babel setup;
-* Begin with looser compiler settings, turn on stricter settings as you approach completion.
+## Migrating JavaScript applications
 
----
-
-TODO: Demo JSDoc
+</Layout>
 
 ---
 
-### Automated migration
+<Layout>
 
-* Semi-automated tools (ReSharper by JetBrains).
+_Incremental migration is possible and encouraged._
+
+</Layout>
 
 ---
+
+<Layout>
+
+_JavaScript compiles as TypeScript without changes._
+
+</Layout>
+
+---
+
+<Layout>
+
+TODO: Example config with `allowJs`.
+
+</Layout>
+
+---
+
+<Layout>
+
+_TypeScript without TypeScript:_
+
+_Typechecks using JSDoc comments._
+
+</Layout>
+
+---
+
+<Layout>
+
+```js
+// @ts-check
+
+/**
+ * @template T
+ * @param  {T[]} list - List to add item to.
+ * @param  {T}   item - The item to append.
+ * @return {T[]}        This is the result.
+ */
+function addItem(list, item) {
+  return list.concat(item)
+}
+```
+
+</Layout>
+
+---
+
+<Layout>
+
+_Leverage your existing Babel setup._
+
+</Layout>
+
+---
+
+<Layout>
+
+TODO: Example `.babelrc` file.
+
+</Layout>
+
+---
+
+<Layout>
+
+_Begin with looser compiler settings._
+
+_Turn on stricter settings as you approach completion._
+
+</Layout>
+
+---
+
+<Layout>
 
 ## Recommendations
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Recommendation: `noImplicitAny`
 
@@ -416,7 +595,11 @@ When a value type can't be inferred, TypeScript assigns it the `any` type.
 Compiler option.
 </Notes>
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Recommendation: `strictNullChecks`
 
@@ -428,7 +611,25 @@ Disallowing `null` value assignment prevents an entire class of errors.
 Compiler option.
 </Notes>
 
+</Layout>
+
 ---
+
+<Layout>
+
+```ts
+function getTextMaybe(): string | null { /* ... */ }
+
+const text: string = getTextMaybe() // Error
+
+const text: string | null = getTextMaybe() // OK
+```
+
+</Layout>
+
+---
+
+<Layout>
 
 ### ESLint
 
@@ -436,7 +637,13 @@ Performs static code analysis.
 
 Customizable with reasonable defaults.
 
+_(Avoid TSLint, it is discontinued.)_
+
+</Layout>
+
 ---
+
+<Layout>
 
 ### Let type inference do its work
 
@@ -444,13 +651,21 @@ Don't bother typing local variable declarations unless you have to.
 
 Always add types to function and method signatures instead.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Prefer function overloading over union types
 
 Overloading is more readable than type unions.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ```ts
 function length(value: string | any[]): number {
@@ -463,19 +678,33 @@ function length(value: any[]): number {
 }
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ## Pain Points
 
+</Layout>
+
 ---
 
-### Third-party modules missing type definitions
+<Layout>
+
+### Some 3rd-party modules missing type definitions
 
 * Roll your own type definitions.
-* Contribute back to Definitely Typed.
-* Import modules with no type definition.
+
+* Import modules without types using `require()`.
+
+<Notes>Contribute to Definitely Typed if you can.</Notes>
+
+</Layout>
 
 ---
+
+<Layout>
 
 ### Compilation time
 
@@ -483,14 +712,22 @@ function length(value: any[]): number {
 * `awesome-typescript-loader`.
 * Optimised watch mode for tests.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### It's still JavaScript in the end
 
 * No runtime typechecks.
 * No performance boost from static types.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ## Why bother?
 
@@ -499,6 +736,8 @@ function length(value: any[]): number {
 * No need to write tests where types are asserted.
 * Function signatures act like documentation.
 * Sweet, sweet code autocompletion.
+
+</Layout>
 
 ---
 
