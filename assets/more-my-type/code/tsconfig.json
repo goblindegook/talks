@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": false,
+    "allowJs": true,
+    "checkJs": true,
+    "allowSyntheticDefaultImports": true,
     "declaration": false,
     "importHelpers": true,
     "jsx": "react",
@@ -15,6 +17,7 @@
     "removeComments": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "target": "esnext"
+    "target": "esnext",
+    "outDir": "./dist"
   }
 }

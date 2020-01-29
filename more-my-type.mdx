@@ -44,6 +44,10 @@ _Types to the rescue!_
 
 ---
 
+TODO: Types are tests.
+
+---
+
 <Layout>
 
 ## Types in React
@@ -186,11 +190,11 @@ _Let's focus on TypeScript._
 </div>
 </Split>
 
+</Layout>
+
 <Notes>
   TypeScript is a superset of ECMAScript.
 </Notes>
-
-</Layout>
 
 ---
 
@@ -404,7 +408,7 @@ if (isBird(somePet)) {
 
 <Layout>
 
-_Type-checking Redux actions with_ `typescript-fsa`_._
+_Type-checking Redux or_ `useReducer` _actions._
 
 <Notes>
   Demo.
@@ -424,15 +428,35 @@ _Type-checking Redux actions with_ `typescript-fsa`_._
 
 <Layout>
 
+### Babel is not required
+
+_But as of 2019, you can compile TypeScript with Babel:_
+
+`npm install @babel/preset-typescript`
+
+</Layout>
+
+<Notes>
+  Don't use unless you're migrating a Babel-based project or you really need Babel.
+</Notes>
+
+---
+
+<Layout>
+
 ### Client side: Webpack
 
-`ts-loader` or `awesome-typescript-loader`
+`npm install ts-loader`
+
+_or_
+
+`npm install awesome-typescript-loader`
+
+</Layout>
 
 <Notes>
   ATL adds compiler cache and typechecks in parallel with compilation.
 </Notes>
-
-</Layout>
 
 ---
 
@@ -440,7 +464,7 @@ _Type-checking Redux actions with_ `typescript-fsa`_._
 
 ### Client side: Rollup
 
-TODO
+`npm install @rollup/plugin-typescript`
 
 </Layout>
 
@@ -460,19 +484,13 @@ Develop in the Node environment with `ts-node`.
 
 <Layout>
 
-### Babel is not required
-
-_(But as of 2019, you can also compile TypeScript with Babel.)_
-
-</Layout>
-
----
-
-<Layout>
-
 _Many JavaScript modules don't come with types. Now what?_
 
 </Layout>
+
+<Notes>
+  You add the react dependency, include the module... and you get an error.
+</Notes>
 
 ---
 
@@ -510,11 +528,25 @@ _JavaScript compiles as TypeScript without changes._
 
 </Layout>
 
+<Notes>
+  You'll remember me saying TypeScript is a superset of ECMAScript, so all
+  JavaScript is valid TypeScript.
+</Notes>
+
 ---
 
 <Layout>
 
-TODO: Example config with `allowJs`.
+### `tsconfig.json`
+
+```json
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true
+  }
+}
+```
 
 </Layout>
 
@@ -560,7 +592,19 @@ _Leverage your existing Babel setup._
 
 <Layout>
 
-TODO: Example `.babelrc` file.
+### `.babelrc`
+
+```json
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/typescript"
+  ],
+  "plugins": [
+    ...
+  ]
+}
+```
 
 </Layout>
 
@@ -733,9 +777,9 @@ function length(value: any[]): number {
 ## Why bother?
 
 * Catch common errors like type invariance or null values at compilation time or on the IDE itself.
-* Refactoring super powers.
 * No need to write tests where types are asserted.
 * Function signatures act like documentation.
+* Refactoring super powers.
 * Sweet, sweet code autocompletion.
 
 </Layout>
