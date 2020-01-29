@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 const Slide = styled.main`
+  max-width: calc(100vh * 4 / 3);
   width: 100vw;
   height: 100vh;
   display: flex;
