@@ -39,24 +39,28 @@ export const Layout = ({ children, footer }) => (
 const Box = styled.div`
   flex: none;
   min-width: 0;
-  width: 50%;
+  width: ${props => props.width || '100%'};
 `
 
 const Flex = styled(Box)`
   display: flex;
   justify-content: center;
   flex-direction: row;
-  height: 100%;
   width: 100%;
   align-items: flex-start;
 `
 
 export const Split = ({ children }) => {
-  const [a, ...rest] = React.Children.toArray(children)
+  const childrenElements = React.Children.toArray(children)
+  const total = childrenElements.length
+
   return (
     <Flex>
-      <Box>{a}</Box>
-      <Box>{rest}</Box>
+      {childrenElements.map((element, idx) => (
+        <Box key={idx} width={`${100 / total}%`}>
+          {element}
+        </Box>
+      ))}
     </Flex>
   )
 }

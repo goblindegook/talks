@@ -11,6 +11,10 @@ export { theme } from './theme'
 
 ---
 
+<Image src="./assets/more-my-type/morpheus.jpg" />
+
+---
+
 # More My Type
 
 _React applications in TypeScript_
@@ -44,7 +48,13 @@ _Types to the rescue!_
 
 ---
 
-TODO: Types are tests.
+_The purpose of types is to make invalid states unrepresentable in code._
+
+---
+
+‘Compilation failures are [test] failures.’
+
+— Robert C. Martin
 
 ---
 
@@ -159,7 +169,7 @@ function Hello (props: HelloProps) {
 
 <Layout>
 
-_Let's focus on TypeScript._
+_Let’s focus on TypeScript._
 
 </Layout>
 
@@ -368,20 +378,36 @@ type FoodItem = Item & Perishable
 
 ### Union types
 
+<Split>
+
 ```ts
 interface Bird {
   kind: 'bird'
   fly()
   layEggs()
+  walk()
 }
+```
 
+```ts
 interface Fish {
   kind: 'fish'
-  swim()
   layEggs()
+  swim()
 }
+```
 
-type Pet = Bird | Fish
+```ts
+interface Mammal {
+  kind: 'mammal'
+  walk()
+}
+```
+
+</Split>
+
+```ts
+type Pet = Bird | Fish | Mammal
 ```
 
 </Layout>
@@ -437,7 +463,7 @@ _But as of 2019, you can compile TypeScript with Babel:_
 </Layout>
 
 <Notes>
-  Don't use unless you're migrating a Babel-based project or you really need Babel.
+  Don’t use unless you’re migrating a Babel-based project or you really need Babel.
 </Notes>
 
 ---
@@ -484,7 +510,7 @@ Develop in the Node environment with `ts-node`.
 
 <Layout>
 
-_Many JavaScript modules don't come with types. Now what?_
+_Many JavaScript modules don’t come with types. Now what?_
 
 </Layout>
 
@@ -529,7 +555,7 @@ _JavaScript compiles as TypeScript without changes._
 </Layout>
 
 <Notes>
-  You'll remember me saying TypeScript is a superset of ECMAScript, so all
+  You’ll remember me saying TypeScript is a superset of ECMAScript, so all
   JavaScript is valid TypeScript.
 </Notes>
 
@@ -632,7 +658,7 @@ _Turn on stricter settings as you approach completion._
 
 ### Recommendation: `noImplicitAny`
 
-When a value type can't be inferred, TypeScript assigns it the `any` type.
+When a value type can’t be inferred, TypeScript assigns it the `any` type.
 
 `any` defeats the purpose of having a type checker.
 
@@ -692,7 +718,7 @@ _(Avoid TSLint, it is discontinued.)_
 
 ### Let type inference do its work
 
-Don't bother typing local variable declarations unless you have to.
+Don’t bother typing local variable declarations unless you have to.
 
 Always add types to function and method signatures instead.
 
@@ -704,7 +730,7 @@ Always add types to function and method signatures instead.
 
 ### Prefer function overloading over union types
 
-Overloading is more readable than type unions.
+Overloading is more readable than union types.
 
 </Layout>
 
@@ -763,7 +789,7 @@ function length(value: any[]): number {
 
 <Layout>
 
-### It's still JavaScript in the end
+### It’s still JavaScript in the end
 
 * No runtime typechecks.
 * No performance boost from static types.
