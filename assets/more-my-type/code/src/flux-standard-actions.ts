@@ -14,7 +14,7 @@ helloCreator({ name: 'world' }) // dispatch this
 
 // Reducing actions:
 
-function reducer<S>(state: S, action: Action<unknown>): S {
+function reducer<T>(state: T, action: Action<unknown>): T {
   // We don't know what action this is to safely handle its payload...
   console.log(action.payload.name)
 
