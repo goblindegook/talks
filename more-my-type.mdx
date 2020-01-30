@@ -421,24 +421,6 @@ type Pet = Bird | Fish
 
 <Layout>
 
-### Type guards
-
-```ts
-function isBird(pet: Pet): pet is Bird {
-  return pet.kind === 'bird'
-}
-
-if (isBird(somePet)) {
-  somePet.fly()
-}
-```
-
-</Layout>
-
----
-
-<Layout>
-
 _Type-checking Redux or_ `useReducer` _actions._
 
 <Notes>
