@@ -7,3 +7,5 @@ interface HelloProps {
 function Hello(props: HelloProps) {
   return <>Hello, {props.name}</>
 }
+
+const _ = <Hello name="world" />

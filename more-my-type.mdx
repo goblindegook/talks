@@ -555,7 +555,41 @@ _Incremental migration is possible and encouraged._
 
 <Layout>
 
-_JavaScript compiles as TypeScript without changes._
+_1. Use TypeScript without using TypeScript._
+
+</Layout>
+
+---
+
+<Image src="./assets/more-my-type/wat.jpg" />
+
+---
+
+<Layout>
+
+### TypeScript via JSDoc
+
+```js
+// @ts-check
+
+/**
+ * @template T
+ * @param  {T[]} list - List to add item to.
+ * @param  {T}   item - The item to append.
+ * @return {T[]}        This is the result.
+ */
+function addItem(list, item) {
+  return list.concat(item)
+}
+```
+
+</Layout>
+
+---
+
+<Layout>
+
+_2. JavaScript compiles as TypeScript without changes._
 
 </Layout>
 
@@ -585,37 +619,7 @@ _JavaScript compiles as TypeScript without changes._
 
 <Layout>
 
-_TypeScript without TypeScript:_
-
-_Typechecks using JSDoc comments._
-
-</Layout>
-
----
-
-<Layout>
-
-```js
-// @ts-check
-
-/**
- * @template T
- * @param  {T[]} list - List to add item to.
- * @param  {T}   item - The item to append.
- * @return {T[]}        This is the result.
- */
-function addItem(list, item) {
-  return list.concat(item)
-}
-```
-
-</Layout>
-
----
-
-<Layout>
-
-_Leverage your existing Babel setup._
+_3. Leverage your existing Babel setup._
 
 </Layout>
 
