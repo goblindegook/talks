@@ -20,13 +20,13 @@ export const theme = syntaxHighlighterPrism({
   code: {
     fontSize: '20px',
     '@media screen and (min-width:56em)': {
-      fontSize: '28px'
+      fontSize: '26px'
     },
     '@media screen and (min-width:64em)': {
-      fontSize: '42px'
+      fontSize: '38px'
     },
     '@media print': {
-      fontSize: '42px'
+      fontSize: '36px'
     }
   },
   css: {
@@ -34,11 +34,11 @@ export const theme = syntaxHighlighterPrism({
     textAlign: 'left',
     fontSize: '1.5rem',
     'pre[class^="language-"]': {
-      padding: '2rem !important',
-      lineHeight: '1.1 !important',
+      padding: '2rem 0 !important',
+      fontSize: '1.4rem !important',
+      lineHeight: '1.6 !important',
       code: {
-        fontSize: '1.6rem !important',
-        lineHeight: '1.1 !important'
+        fontSize: '1.4rem !important'
       }
     },
     '@media screen and (min-width:64em)': {

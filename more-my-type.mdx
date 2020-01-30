@@ -17,11 +17,11 @@ export { theme } from './theme'
 
 # More My Type
 
-_React applications in TypeScript_
+React applications in TypeScript
 
 <br />
 
-Tech Along · January 30, 2020
+_Tech Along · January 30, 2020_
 
 ---
 
@@ -48,13 +48,21 @@ _Types to the rescue!_
 
 ---
 
+<Layout>
+
 _The purpose of types is to make invalid states unrepresentable in code._
 
+</Layout>
+
 ---
+
+<Layout>
 
 ‘Compilation failures are [test] failures.’
 
 — Robert C. Martin
+
+</Layout>
 
 ---
 
@@ -397,17 +405,10 @@ interface Fish {
 }
 ```
 
-```ts
-interface Mammal {
-  kind: 'mammal'
-  walk()
-}
-```
-
 </Split>
 
 ```ts
-type Pet = Bird | Fish | Mammal
+type Pet = Bird | Fish
 ```
 
 </Layout>
@@ -458,7 +459,7 @@ _Type-checking Redux or_ `useReducer` _actions._
 
 _But as of 2019, you can compile TypeScript with Babel:_
 
-`npm install @babel/preset-typescript`
+`npm i @babel/preset-typescript`
 
 </Layout>
 
@@ -472,11 +473,11 @@ _But as of 2019, you can compile TypeScript with Babel:_
 
 ### Client side: Webpack
 
-`npm install ts-loader`
+`npm i ts-loader`
 
 _or_
 
-`npm install awesome-typescript-loader`
+`npm i awesome-typescript-loader`
 
 </Layout>
 
@@ -490,7 +491,7 @@ _or_
 
 ### Client side: Rollup
 
-`npm install @rollup/plugin-typescript`
+`npm i @rollup/plugin-typescript`
 
 </Layout>
 
@@ -526,7 +527,7 @@ _Many JavaScript modules don’t come with types. Now what?_
 
 Install typings for third-party modules from the `@types` organization.
 
-`npm install @types/react`
+`npm i @types/react`
 
 </Layout>
 
@@ -534,7 +535,7 @@ Install typings for third-party modules from the `@types` organization.
 
 <Layout>
 
-## Migrating JavaScript applications
+## Migrating applications
 
 </Layout>
 
