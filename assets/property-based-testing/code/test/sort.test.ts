@@ -8,7 +8,7 @@ function mySort(collection: readonly number[]): readonly number[] {
 }
 
 describe('sort()', () => {
-  test('length does not change', () => {
+  test('does not change length', () => {
     assert(
       property(
         array(float()),
@@ -25,7 +25,7 @@ describe('sort()', () => {
     )
   })
 
-  test('compare with ramda/sort', () => {
+  test('comparison with ramda/sort', () => {
     assert(
       property(array(integer()), collection => {
         return equals(

@@ -4,15 +4,14 @@ import { mermaidAPI } from 'mermaid'
 
 const Diagram = styled.div`
   width: 80vw;
-  height: 70vh;
   display: grid;
   justify-items: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.8rem;
 
   & svg {
-    max-width: 100% !important;
-    max-height: 100%;
+    width: 100% !important;
+    min-height: 30vh;
   }
 `
 
