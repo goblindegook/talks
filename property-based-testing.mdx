@@ -1,7 +1,7 @@
 import { Appear, Head, Image, Notes } from 'mdx-deck'
-import { Split, SplitRight, FullScreenCode } from 'mdx-deck/layouts'
+import { SplitRight, FullScreenCode } from 'mdx-deck/layouts'
+import { Layout, Split } from './components/Layout'
 import { Caption, Mermaid, Overlay } from './components'
-
 export { theme } from './theme'
 
 <Head>
@@ -11,26 +11,31 @@ export { theme } from './theme'
 # More Tests, Less Work
 
 <br />
-<hr />
 
-Pixels.Camp · March 22, 2019
+_Expert Talks Porto · February 6, 2020_
 
 ---
+
+<SplitRight>
+<Image width="50vw" src="./assets/property-based-testing/asshole.jpg" />
 
 ## Luís Rodrigues
 
 [goblindegook.com](https://goblindegook.com)  
 [@goblindegook](https://twitter.com/goblindegook)
+</SplitRight>
 
 ---
 
-### 👷 Software engineer at Equal Experts.
+<Image src="./assets/property-based-testing/equal-experts-logo.png" />
 
 ---
 
 ### 👮 Test-driven development police.
 
 ---
+
+<Layout>
 
 ## Why test?
 
@@ -39,7 +44,11 @@ Pixels.Camp · March 22, 2019
 - Documentation
 - Design aid (TDD)
 
+</Layout>
+
 ---
+
+<Layout>
 
 ## How to test?
 
@@ -50,7 +59,11 @@ Pixels.Camp · March 22, 2019
   - Example-based
   - Generative
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Example-based testing
 
@@ -59,17 +72,29 @@ Pixels.Camp · March 22, 2019
 - Are we maintaining irrelevant tests?
 - How much work would it take to change them?
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Property-based testing
 
 _Instead of individual cases, test general behaviour._
 
+</Layout>
+
 ---
+
+<Layout>
 
 _This is not a call to throw out your existing tests._
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Generators
 
@@ -78,7 +103,11 @@ Generate _mostly_ random values for use in tests.
 Before even thinking about properties,  
 the ability to generate inputs is already valuable.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Common built-in generators
 
@@ -88,7 +117,11 @@ the ability to generate inputs is already valuable.
 - Collections (with optional size range)
 - Functions
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Generator composition
 
@@ -103,7 +136,11 @@ const person = fc.record({
 })
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Filters
 
@@ -120,15 +157,23 @@ const adult = person.filter(p => p.age >= 18)
 
 _Overly restrictive conditions will delay your tests._
 
+</Layout>
+
 ---
+
+<Layout>
 
 ## Properties of addition
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Properties of addition: Commutativity
 
-## x + y = y + x
+_x + y = y + x_
 
 ```js
 fc.assert(
@@ -136,11 +181,15 @@ fc.assert(
 )
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Properties of addition: Associativity
 
-## (x + y) + z = x + (y + z)
+_(x + y) + z = x + (y + z)_
 
 ```js
 fc.assert(
@@ -153,41 +202,57 @@ fc.assert(
 )
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Properties of addition: Null element
 
-## x + 0 = x
+_x + 0 = x_
 
 ```js
 fc.assert(fc.property(fc.float(), a => add(a, 0) === a))
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Properties of addition: Successor
 
-## x + 1 > x
+_x + 1 > x_
 
 ```js
 fc.assert(fc.property(fc.float(), a => add(a, 1) > a))
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Properties of addition: Inverse
 
-## -x + x = 0
+_-x + x = 0_
 
 ```js
 fc.assert(fc.property(fc.float(), a => add(-a, a) === 0))
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Properties of addition: Distributivity
 
-## m &times; (x + y) = m &times; x + m &times; y
+_m &times; (x + y) = m &times; x + m &times; y_
 
 ```js
 fc.assert(
@@ -200,11 +265,19 @@ fc.assert(
 )
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ## How to determine properties to test?
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Different paths, same goal
 
@@ -225,7 +298,11 @@ graph LR;
 
 _E.g._, commutativity, associativity.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Roundtrip tests
 
@@ -242,7 +319,11 @@ graph LR;
 
 _E.g._, serialisation/deserialisation, getters/setters.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Invariants
 
@@ -258,7 +339,11 @@ graph LR;
 
 _E.g._, mapped collection length, sorting yields same elements and size.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Idempotence
 
@@ -276,7 +361,11 @@ graph LR;
 
 _E.g._, setters, sorting, filters.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Comparing implementations
 
@@ -305,7 +394,11 @@ graph LR;
 
 _E.g._, naïve/optimised, single-/multi-threaded, legacy/refactor.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Shrinkers
 
@@ -313,7 +406,11 @@ Shrinkers exist for when a test fails.
 
 They find the smallest input that still fails the test.
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Arbitrary datetime (no shrink)
 
@@ -336,7 +433,11 @@ fc.assert(fc.property(datetime, d => d < new Date()))
     Got error: Property failed by returning false
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Arbitrary datetime (with shrink)
 
@@ -356,7 +457,11 @@ fc.assert(fc.property(datetime, d => d < new Date()))
     Got error: Property failed by returning false
 ```
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Language support
 
@@ -369,7 +474,11 @@ fc.assert(fc.property(datetime, d => d < new Date()))
 | **Haskell** | QuickCheck      | **Swift**      | SwiftCheck           |
 | **Java**    | junit-quicktest | **TypeScript** | fast-check, JSVerify |
 
+</Layout>
+
 ---
+
+<Layout>
 
 ### Property-based testing
 
@@ -380,6 +489,8 @@ fc.assert(fc.property(datetime, d => d < new Date()))
   - Not practical as a full replacement.
 
 - You may have to change your testing approach.
+
+</Layout>
 
 ---
 
