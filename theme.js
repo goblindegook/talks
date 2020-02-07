@@ -33,6 +33,9 @@ export const theme = syntaxHighlighterPrism({
     ...book.css,
     textAlign: 'left',
     fontSize: '1.5rem',
+    table: {
+      fontSize: '1.8rem'
+    },
     'pre[class^="language-"]': {
       padding: '2rem 0 !important',
       fontSize: '1.4rem !important',
@@ -42,7 +45,7 @@ export const theme = syntaxHighlighterPrism({
       }
     },
     '@media screen and (min-width:64em)': {
-      fontSize: '3em'
+      fontSize: '3rem'
     },
     '& .Slide > div': {
       minWidth: '80vw',

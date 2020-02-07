@@ -226,7 +226,7 @@ fc.assert(fc.property(fc.float(), a => add(a, 0) === a))
 
 _x + 1 > x_
 
-```js
+```typescript
 fc.assert(fc.property(fc.float(), a => add(a, 1) > a))
 ```
 
@@ -240,7 +240,7 @@ fc.assert(fc.property(fc.float(), a => add(a, 1) > a))
 
 _-x + x = 0_
 
-```js
+```typescript
 fc.assert(fc.property(fc.float(), a => add(-a, a) === 0))
 ```
 
@@ -254,7 +254,7 @@ fc.assert(fc.property(fc.float(), a => add(-a, a) === 0))
 
 _m &times; (x + y) = m &times; x + m &times; y_
 
-```js
+```typescript
 fc.assert(
   fc.property(
     fc.float(),

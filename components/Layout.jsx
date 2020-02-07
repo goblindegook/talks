@@ -8,6 +8,7 @@ const Slide = styled.main`
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  margin: 0 auto;
   padding: 2rem;
 `
 
@@ -31,7 +32,7 @@ export const Layout = ({ children, footer }) => (
     <Body>{children}</Body>
     <Footer>
       <span>{footer}</span>
-      <span>@goblindegook</span>
+      <a href="https://twitter.com/goblindegook">@goblindegook</a>
     </Footer>
   </Slide>
 )

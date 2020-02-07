@@ -59,7 +59,7 @@ describe('fizzbuzz', () => {
   test('dirty: other numbers are preserved', () => {
     assert(
       property(
-        nat().filter(n => n % 3 !== 0 && n % 5 !== 0),
+        nat().filter(n => n % 3 > 0 && n % 5 > 0),
         n => fizzbuzz(n, n)[0] === `${n}`
       )
     )
