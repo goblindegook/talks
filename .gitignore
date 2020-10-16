@@ -1,4 +1,13 @@
+.idea/
 dist/
 node_modules/
-*.log
+out/
+tmp/**
 .DS_Store
+.sass-cache
+.svn
+*.eml
+*.iml
+*.iws
+*.log
+log/*.log
