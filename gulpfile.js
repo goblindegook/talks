@@ -15,8 +15,6 @@ gulp.task('styles', () =>
     .pipe(gulp.dest('./dist/theme'))
 )
 
-gulp.task('default', gulp.parallel('styles'))
-
 gulp.task('build', gulp.parallel('styles'))
 
 gulp.task('reload', () => gulp.src(['*.html', '*.md']).pipe(connect.reload()))
@@ -33,3 +31,5 @@ gulp.task('serve', () => {
 
   gulp.watch(['./theme/*.{css,sass,scss}'], gulp.series('styles', 'reload'))
 })
+
+gulp.task('default', gulp.series('build'))
