@@ -21,7 +21,7 @@
       <div class="slides">
         <section>
           <h1>@testing-library</h1>
-          <p><em>Or, How I Learned to Stop Worrying and Love the DOM.</em></p>
+          <p><em>Or, how I learned to stop worrying about the DOM.</em></p>
           <hr />
           <p>LuxembourgJS · November 4, 2020</p>
         </section>
@@ -32,43 +32,46 @@
           <p><a href="https://twitter.com/goblindegook">@goblindegook</a></p>
         </section>
 
-        <section>Testing the frontend with confidence.</section>
+        <section>
+          <p>
+            Testing the frontend<br />
+            with confidence.
+          </p>
+
+          <aside class="notes">
+            The point of testing is to be able to develop, debug, and deploy
+            with confidence. Don't go chasing metrics or prescribed formulas.
+            Ask, "Does this test give me confidence?"
+          </aside>
+        </section>
 
         <section>
-          <ul>
-            <li>Complicated setup</li>
-            <li>Slow AF</li>
-            <li>Changes are cumbersome</li>
-            <li>Tests break all the time</li>
+          <h3>Browser Tests</h3>
+          <ul class="emoji">
+            <li class="nope">Convenient</li>
+            <li class="nope">Fast</li>
+            <li class="nope">Maintainable</li>
+            <li class="nope">Robust</li>
           </ul>
 
-          <aside class="notes">Sometimes changes are Cucumber-some.</aside>
+          <aside class="notes">
+            Tests are complicated and hard to setup, slow AF, (Cu)cumbersome
+            changes, tests break all the time.
+          </aside>
         </section>
 
         <section>
-          <ul>
-            <li>Readable</li>
-            <li>Fast</li>
-            <li>Maintainable</li>
-            <li>Robust</li>
+          <h3>Enzyme</h3>
+          <ul class="emoji">
+            <li class="okay">Convenient</li>
+            <li class="okay">Fast</li>
+            <li class="meh">Maintainable</li>
+            <li class="meh">Robust</li>
           </ul>
         </section>
 
         <section>
-          <h2>Enzyme</h2>
-        </section>
-
-        <section>
-          <ul>
-            <li>Readable</li>
-            <li>Fast</li>
-            <li><s>Maintainable</s></li>
-            <li><s>Robust</s></li>
-          </ul>
-        </section>
-
-        <section>
-          Enzyme’s API encourages testing implementation details.
+          Enzyme made it too easy to test implementation details.
 
           <aside class="notes">
             Primarily shallow rendering. But also selection by component name
@@ -76,10 +79,10 @@
           </aside>
         </section>
 
-        <section>Shallow rendering.</section>
-
         <section>
-          TODO: Diagram
+          <h3>Shallow rendering</h3>
+
+          TODO: Redo diagram to explain shallow rendering
 
           <aside class="notes">
             Allows ‘testing a component as a unit’, and ensures tests aren’t
@@ -99,56 +102,108 @@
           </aside>
         </section>
 
-        <section>
-          ‘Does this mean we have to write integration tests and not unit
-          tests?’
+        <section
+          data-background-image="/assets/testing-library/pyramid.jpg"
+        ></section>
+
+        <section
+          data-background-image="/assets/testing-library/pyramid.jpg"
+          data-background-opacity="0.2"
+        >
+          <p>Slower</p>
+          <p>↕</p>
+          <p>Faster</p>
+        </section>
+
+        <section
+          data-background-image="/assets/testing-library/pyramid.jpg"
+          data-background-opacity="0.2"
+        >
+          <p>More Expensive</p>
+          <p>↕</p>
+          <p>Cheaper</p>
+        </section>
+
+        <section
+          data-background-image="/assets/testing-library/pyramid.jpg"
+          data-background-opacity="0.2"
+        >
+          <p>Big Picture</p>
+          <p>↕</p>
+          <p>Detail</p>
+        </section>
+
+        <section
+          data-background-image="/assets/testing-library/pyramid.jpg"
+          data-background-opacity="0.2"
+        >
+          <p>Cooperation</p>
+          <p>↕</p>
+          <p>Single Responsibility</p>
         </section>
 
         <section>
-          <img src="/assets/testing-library/test-pyramid.png" alt="" />
+          <p>The messy middle.</p>
+
+          <aside class="notes">
+            The definitions of ‘unit test’ and ‘integration test’ are a bit
+            wishy-washy. And is it 'integration', 'integrated', 'service',
+            or...?
+          </aside>
         </section>
 
         <section>
           <p>A unit test must run in isolation.</p>
-          <p>A unit test must focus on a small part of the system.</p>
-          <p>A unit test must be fast.</p>
 
           <aside class="notes">
-            The definitions of ‘unit test’ and ‘integration test’ are a bit
-            wishy-washy, but a few things we can agree on.
+            Misconceptions slot neatly into Enzyme's antipatterns. Isolation
+            does not mean mock everything else. It means the TEST ITSELF must be
+            isolated. It should be able to run by itself, in a sequence of
+            tests, or even in parallel.
           </aside>
         </section>
 
         <section>
-          <h3>An isolated unit does not mean...</h3>
-          <ul>
-            <li>Every single isolated function.</li>
-            <li>Every single isolated class.</li>
-            <li>Every single isolated component.</li>
-          </ul>
+          <p>A unit test must be fast.</p>
         </section>
 
         <section>
-          The <em>unit</em> is whatever makes sense, tested at a level that
-          makes sense.
+          <p>A unit test must focus on a ‘small’ part of the system.</p>
+
+          <aside class="notes">
+            "Small" does not mean "smallest". It's not about testing every
+            individual function or class of the system.
+          </aside>
         </section>
 
         <section>
-          <h3>Things I don’t care about when doing TDD</h3>
+          <p>
+            The <em>unit</em> is whatever makes sense, tested at a level that
+            makes sense.
+          </p>
+
+          <aside class="notes">
+            A test is described by how it handles itself, not by the size or
+            complexity of the component it's testing.
+          </aside>
+        </section>
+
+        <section>
+          <h3>Stuff I don’t care about when doing TDD:</h3>
           <ul>
-            <li>How many subcomponents I’m going to need.</li>
-            <li>How subcomponents are implemented.</li>
-            <li>Who implements these subcomponents.</li>
+            <li>What subcomponents I’m going to need.</li>
+            <li>How they’re implemented.</li>
+            <li>Who implements them.</li>
           </ul>
+
           <aside class="notes">
             Often subcombonents are a consequence of refactoring. Third party
-            dependencies. Dive deeper to handle complexity.
+            dependencies.
           </aside>
         </section>
 
         <section>
-          As long as the interface does not change, when I refactor a module,
-          <u>tests shouldn’t break</u>.
+          <p>Refactoring should not break tests.</p>
 
           <aside class="notes">
             Refactoring is one of the most important approaches to tackling tech
@@ -157,34 +212,29 @@
         </section>
 
         <section>
-          Your unit tests based on shallow rendering are green... but the
-          application is broken.
+          <p>
+            Your unit tests based on shallow rendering are green... but the
+            application is broken.
+          </p>
 
           <aside class="notes">
-            <p>Tests are missing their purpose</p>
-            <p>Changing potentially untested subcomponents.</p>
-            <p>Third-party components break but tests never exercise them.</p>
+            Shallow rendering/mocking is how you can have 100% test coverage
+            with a broken application. You're missing the point of tests.
+            Changing potentially untested subcomponents. Third-party components
+            break but tests never exercise them.
           </aside>
         </section>
 
-        <section>‘But I don’t want to test third-party components!’</section>
-
         <section>
-          You still need to be sure the application works.
+          <p>You don't test third party components</p>
+          <p><em>but...</em></p>
 
           <aside class="notes">
-            <p>
-              What’s the point of having all green unit tests if some untested
-              component or integration breaks the application?
-            </p>
-            <p>
-              Don’t fake or mock components unless you’re doing it to avoid a)
-              shared state that breaks test isolation, b) slowness, c) setup
-              complexity, or d) unpredictability.
-            </p>
-            <p>
-              If it’s easier, faster and simpler to not mock, why not do it?
-            </p>
+            You still need to be sure the application works. What’s the point of
+            having all green unit tests if some untested component or
+            integration breaks the application? Don’t fake or mock components
+            unless you’re doing it to avoid a) shared state that breaks test
+            isolation, b) slowness, c) setup complexity, or d) unpredictability.
           </aside>
         </section>
 
@@ -194,9 +244,9 @@
             <li>Do whatever makes the test pass.</li>
           </ol>
 
-          <p>
+          <aside class="notes">
             Again, I don't care <em>which</em> components implement the feature.
-          </p>
+          </aside>
         </section>
 
         <section>
@@ -213,10 +263,22 @@
           </blockquote>
         </section>
 
-        <section>Depends on JSDOM, otherwise test-runner–agnostic.</section>
-
         <section>
           Provides a set of primitives that mimic user interaction.
+        </section>
+
+        <section>
+          <h3>Less this</h3>
+          <pre><code data-trim data-lang="js">
+            $('div.login .btn-primary + a').click()
+					</code></pre>
+        </section>
+
+        <section>
+          <h3>More this</h3>
+          <pre><code data-trim data-lang="js">
+							fireEvent.click(getByText(/recover password/i))
+					</code></pre>
         </section>
 
         <section>

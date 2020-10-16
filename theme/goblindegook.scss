@@ -51,6 +51,26 @@ $codeFont: 'Fira Code', monospace;
   font-family: 'Alegreya SC', $headingFont;
 }
 
+.reveal .emoji li {
+  list-style-type: none;
+
+  &::before {
+    margin-right: 16px;
+  }
+
+  &.okay::before {
+    content: '✅';
+  }
+
+  &.nope::before {
+    content: '❌';
+  }
+
+  &.meh::before {
+    content: '🤷‍♀️';
+  }
+}
+
 .reveal blockquote {
   box-shadow: none;
   font-style: normal;
