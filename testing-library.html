@@ -1,250 +1,250 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>@testing-library</title>
+    <link rel="stylesheet" href="/theme/reset.css" />
+    <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="/dist/theme/goblindegook.css" id="theme" />
+    <link
+      rel="stylesheet"
+      href="/node_modules/reveal.js/plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>@testing-library</h1>
+          <p><em>Or, How I Learned to Stop Worrying and Love the DOM.</em></p>
+          <hr />
+          <p>LuxembourgJS · November 4, 2020</p>
+        </section>
 
-		<title>@testing-library</title>
+        <section>
+          <h2>Luís Rodrigues</h2>
+          <p><a href="https://goblindegook.com">goblindegook.com</a></p>
+          <p><a href="https://twitter.com/goblindegook">@goblindegook</a></p>
+        </section>
 
-		<link rel="stylesheet" href="/theme/reset.css">
-		<link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css">
-		<link rel="stylesheet" href="/dist/theme/goblindegook.css" id="theme">
+        <section>Testing the frontend with confidence.</section>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="/node_modules/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<h1>@testing-library</h1>
-					<p><em>Or, How I Learned to Stop Worrying and Love the DOM.</em></p>
-					<hr>
-					<p>LuxembourgJS · November 4, 2020</p>
-				</section>
-
-				<section>
-					<h2>Luís Rodrigues</h2>
-					<p><a href="https://goblindegook.com">goblindegook.com</a></p>
-					<p><a href="https://twitter.com/goblindegook">@goblindegook</a></p>
-				</section>
-
-				<section>
-					Testing the frontend with confidence.
-				</section>
-
-				<section>
-					<ul>
-						<li>Complicated setup</li>
-						<li>Slow AF</li>
+        <section>
+          <ul>
+            <li>Complicated setup</li>
+            <li>Slow AF</li>
             <li>Changes are cumbersome</li>
             <li>Tests break all the time</li>
           </ul>
 
+          <aside class="notes">Sometimes changes are Cucumber-some.</aside>
+        </section>
+
+        <section>
+          <ul>
+            <li>Readable</li>
+            <li>Fast</li>
+            <li>Maintainable</li>
+            <li>Robust</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Enzyme</h2>
+        </section>
+
+        <section>
+          <ul>
+            <li>Readable</li>
+            <li>Fast</li>
+            <li><s>Maintainable</s></li>
+            <li><s>Robust</s></li>
+          </ul>
+        </section>
+
+        <section>
+          Enzyme’s API encourages testing implementation details.
+
           <aside class="notes">
-            Sometimes changes are Cucumber-some.
+            Primarily shallow rendering. But also selection by component name
+            and component instance state and property inspection.
           </aside>
-				</section>
+        </section>
 
-				<section>
-					<ul>
-						<li>Readable</li>
-            <li>Fast</li>
-						<li>Maintainable</li>
-						<li>Robust</li>
+        <section>Shallow rendering.</section>
+
+        <section>
+          TODO: Diagram
+
+          <aside class="notes">
+            Allows ‘testing a component as a unit’, and ensures tests aren’t
+            indirectly asserting on behavior of child components.
+          </aside>
+        </section>
+
+        <section>
+          <h1>💔</h1>
+
+          <aside class="notes">
+            Testing implementation details limits your ability to refactor. If
+            tests are constantly breaking for no good reason, you’ll stop
+            testing. Tests with shallow rendering are prone to break when
+            components or component structure change, even if presentation and
+            behaviour remains the same.
+          </aside>
+        </section>
+
+        <section>
+          ‘Does this mean we have to write integration tests and not unit
+          tests?’
+        </section>
+
+        <section>
+          <img src="/assets/testing-library/test-pyramid.png" alt="" />
+        </section>
+
+        <section>
+          <p>A unit test must run in isolation.</p>
+          <p>A unit test must focus on a small part of the system.</p>
+          <p>A unit test must be fast.</p>
+
+          <aside class="notes">
+            The definitions of ‘unit test’ and ‘integration test’ are a bit
+            wishy-washy, but a few things we can agree on.
+          </aside>
+        </section>
+
+        <section>
+          <h3>An isolated unit does not mean...</h3>
+          <ul>
+            <li>Every single isolated function.</li>
+            <li>Every single isolated class.</li>
+            <li>Every single isolated component.</li>
           </ul>
-				</section>
+        </section>
 
-				<section>
-					<h2>Enzyme</h2>
-				</section>
+        <section>
+          The <em>unit</em> is whatever makes sense,<br />
+          tested at a level that makes sense.
+        </section>
 
-				<section>
-					<ul>
-						<li>Readable</li>
-            <li>Fast</li>
-						<li>x Maintainable</s></li>
-						<li>x Robust</s></li>
+        <section>
+          <h3>Things I don’t care about<br />when doing TDD</h3>
+          <ul>
+            <li>How many subcomponents I’m going to need.</li>
+            <li>How subcomponents are implemented.</li>
+            <li>Who implements these subcomponents.</li>
           </ul>
-				</section>
+          <aside class="notes">
+            Often subcombonents are a consequence of refactoring. Third party
+            dependencies. Dive deeper to handle complexity.
+          </aside>
+        </section>
 
-				<section>
-					Enzyme’s API encourages testing implementation details.
+        <section>
+          As long as the interface does not change,<br />
+          when I refactor a module, <u>tests shouldn’t break</u>.
 
-					<aside class="notes">
-						Primarily shallow rendering. But also selection by component name and
-						component instance state and property inspection.
-					</aside>
-				</section>
+          <aside class="notes">
+            Refactoring is one of the most important approaches to tackling tech
+            debt. You don’t want to have your hands tied here.
+          </aside>
+        </section>
 
-				<section>Shallow rendering.</section>
+        <section>
+          Your unit tests based on shallow rendering are green...<br />
+          but the application is broken.
 
-				<section>
-					TODO: Diagram
+          <aside class="notes">
+            <p>Tests are missing their purpose</p>
+            <p>Changing potentially untested subcomponents.</p>
+            <p>Third-party components break but tests never exercise them.</p>
+          </aside>
+        </section>
 
-					<aside class="notes">
-						Allows ‘testing a component as a unit’, and ensures tests aren’t indirectly
-						asserting on behavior of child components.
-					</aside>
-				</section>
+        <section>‘But I don’t want to test third-party components!’</section>
 
-				<section>
-					<h1>💔</h1>
+        <section>
+          You still need to be sure the application works.
 
-					<aside class="notes">
-						Testing implementation details limits your ability to refactor.
-						If tests are constantly breaking for no good reason, you’ll stop testing.
+          <aside class="notes">
+            <p>
+              What’s the point of having all green unit tests if some untested
+              component or integration breaks the application?
+            </p>
+            <p>
+              Don’t fake or mock components unless you’re doing it to avoid a)
+              shared state that breaks test isolation, b) slowness, c) setup
+              complexity, or d) unpredictability.
+            </p>
+            <p>
+              If it’s easier, faster and simpler to not mock, why not do it?
+            </p>
+          </aside>
+        </section>
 
-						Tests with shallow rendering are prone to break
-						when components or component structure change,
-						even if presentation and behaviour remains the same.
-					</aside>
-				</section>
+        <section>
+          <ol>
+            <li>Write a test to drive the implementation or integration.</li>
+            <li>Do whatever makes the test pass.</li>
+          </ol>
 
-				<section>
-					‘Does this mean we have to write integration tests and not unit tests?’
-				</section>
+          <p>
+            Again, I don't care <em>which</em> components implement the feature.
+          </p>
+        </section>
 
-				<section><img src="/assets/testing-library/test-pyramid.png" alt=""></section>
+        <section>
+          <a href="https://testing-library.com">testing-library.com</a>
+        </section>
 
-				<section>
-					<p>A unit test must run in isolation.</p>
-					<p>A unit test must focus on a small part of the system.</p>
-					<p>A unit test must be fast.</p>
+        <section>
+          <blockquote>
+            <p>
+              “The more your tests resemble the way your software is used, the
+              more confidence they can give you.”
+            </p>
+            <cite>Kent C. Dodds</cite>
+          </blockquote>
+        </section>
 
-					<aside class="notes">
-						The definitions of ‘unit test’ and ‘integration test’ are a bit wishy-washy,
-						but a few things we can agree on.
-					</aside>
-				</section>
+        <section>Depends on JSDOM, otherwise test-runner–agnostic.</section>
 
-				<section>
-					<h3>An isolated unit does not mean...</h3>
-					<ul>
-						<li>Every single isolated function.</li>
-						<li>Every single isolated class.</li>
-						<li>Every single isolated component.</li>
-					</ul>
-				</section>
+        <section>
+          Provides a set of primitives that mimic user interaction.
+        </section>
 
-				<section>
-					The <em>unit</em> is whatever makes sense,<br>
-					tested at a level that makes sense.
-				</section>
-
-				<section>
-					<h3>Things I don’t care about<br>when doing TDD</h3>
-					<ul>
-						<li>How many subcomponents I’m going to need.</li>
-						<li>How subcomponents are implemented.</li>
-						<li>Who implements these subcomponents.</li>
-					</ul>
-					<aside class="notes">
-						Often subcombonents are a consequence of refactoring.
-						Third party dependencies.
-						Dive deeper to handle complexity.
-					</aside>
-				</section>
-
-				<section>
-					As long as the interface does not change,<br>
-					when I refactor a module, <u>tests shouldn’t break</u>.
-
-					<aside class="notes">
-						Refactoring is one of the most important approaches to tackling tech debt. You
-						don’t want to have your hands tied here.
-					</aside>
-				</section>
-
-				<section>
-					Your unit tests based on shallow rendering are green...<br>
-					but the application is broken.
-
-					<aside class="notes">
-						<p>Tests are missing their purpose</p>
-						<p>Changing potentially untested subcomponents.</p>
-						<p>Third-party components break but tests never exercise them.</p>
-					</aside>
-				</section>
-
-				<section>
-					‘But I don’t want to test third-party components!’
-				</section>
-
-				<section>
-					You still need to be sure the application works.
-
-					<aside class="notes">
-						<p>
-							What’s the point of having all green unit tests if some untested component
-							or integration breaks the application?
-						</p>
-						<p>
-							Don’t fake or mock components unless you’re doing it to avoid a) shared
-							state that breaks test isolation, b) slowness, c) setup complexity, or d)
-							unpredictability.
-						</p>
-						<p>If it’s easier, faster and simpler to not mock, why not do it?</p>
-					</aside>
-				</section>
-
-				<section>
-					<ol>
-						<li>Write a test to drive the implementation or integration.</li>
-						<li>Do whatever makes the test pass.</li>
-					</ol>
-
-					<p>Again, I don't care <em>which</em> components implement the feature.</p>
-				</section>
-
-				<section>
-					<a href="https://testing-library.com">testing-library.com</a>
-				</section>
-
-				<section>
-					<blockquote>
-						<p>
-							“The more your tests resemble the way your software is used,
-							the more confidence they can give you.”
-						</p>
-						<cite>Kent C. Dodds</cite>
-					</blockquote>
-				</section>
-
-				<section>
-					Depends on JSDOM, otherwise test-runner–agnostic.
-				</section>
-
-				<section>
-					Provides a set of primitives that mimic user interaction.
-				</section>
-
-				<section>
+        <section>
           <table>
             <tr>
-              <td style="text-align: right; vertical-align: middle;">
+              <td style="text-align: right; vertical-align: middle">
                 <p>
-                  <code>get</code><br>
+                  <code>get</code><br />
                   <code>getAll</code>
                 </p>
                 <p>
-                  <code>query</code><br>
+                  <code>query</code><br />
                   <code>queryAll</code>
                 </p>
                 <p>
-                  <code>find</code><br>
+                  <code>find</code><br />
                   <code>findAll</code>
                 </p>
               </td>
-              <td style="vertical-align: middle;">+</td>
-              <td style="vertical-align: middle;">
+              <td style="vertical-align: middle">+</td>
+              <td style="vertical-align: middle">
                 <p>
-                  <code>ByText()</code><br>
-                  <code>ByLabelText()</code><br>
-                  <code>ByPlaceholderText()</code><br>
-                  <code>ByAltText()</code><br>
-                  <code>ByTitle()</code><br>
-                  <code>ByDisplayValue()</code><br>
+                  <code>ByText()</code><br />
+                  <code>ByLabelText()</code><br />
+                  <code>ByPlaceholderText()</code><br />
+                  <code>ByAltText()</code><br />
+                  <code>ByTitle()</code><br />
+                  <code>ByDisplayValue()</code><br />
                   <code>ByRole()</code>
                 </p>
               </td>
@@ -252,25 +252,25 @@
           </table>
 
           <aside class="notes">
-						<p>Search by text or RegExp.</p>
-						<p>No CSS selectors, you see what the user sees.</p>
-						<p>Link or button? Doesn’t matter!</p>
-					</aside>
-				</section>
+            <p>Search by text or RegExp.</p>
+            <p>No CSS selectors, you see what the user sees.</p>
+            <p>Link or button? Doesn’t matter!</p>
+          </aside>
+        </section>
 
-				<section>
-					<h3>Escape hatch</h3>
+        <section>
+          <h3>Escape hatch</h3>
 
-					<p><code>getByTestId()</code></p>
+          <p><code>getByTestId()</code></p>
 
-					<aside class="notes">
-						Last resort if all else fails.
-						Does not overload other IDs or classes for testing.
-					</aside>
-				</section>
+          <aside class="notes">
+            Last resort if all else fails. Does not overload other IDs or
+            classes for testing.
+          </aside>
+        </section>
 
-				<section>
-					<pre><code data-trim data-noescape data-line-numbers="5-7|9">
+        <section>
+          <pre><code data-trim data-noescape data-line-numbers="5-7|9">
 						<script type="text/template">
 							test('has a delete button', () => {
 								const data = { id: '9999', name: 'Test entry.' }
@@ -285,25 +285,25 @@
 							})
 						</script>
 					</code></pre>
-				</section>
+        </section>
 
-				<section>
-					What you get back is DOM nodes.
+        <section>
+          What you get back is DOM nodes.
 
-					<aside class="notes">
-						No wrappers around React components.
-						Reimplement the component in Vue and you’ll barely need to touch tests.
-					</aside>
-				</section>
+          <aside class="notes">
+            No wrappers around React components. Reimplement the component in
+            Vue and you’ll barely need to touch tests.
+          </aside>
+        </section>
 
-				<section>
-					<pre><code data-trim>
+        <section>
+          <pre><code data-trim>
 							fireEvent.click(getByText('Click me!'))
 					</code></pre>
-				</section>
+        </section>
 
-				<section>
-					<pre><code data-trim data-noescape data-line-numbers="4-6|8-9">
+        <section>
+          <pre><code data-trim data-noescape data-line-numbers="4-6|8-9">
 						<script type="text/template">
 						test('deletes entry after animation', () => {
               const data = { id: '9999', name: 'Test entry.' }
@@ -319,95 +319,91 @@
 						})
 						</script>
 					</code></pre>
-				</section>
+        </section>
 
-				<section>
+        <section>
           Encourages <em>not</em> testing implementation details.
 
-					<aside class="notes">
-            Beware the tradeoffs:
-            Having to write many similar tests for all possible outputs.
-						When one change breaks multiple tests.
-					</aside>
+          <aside class="notes">
+            Beware the tradeoffs: Having to write many similar tests for all
+            possible outputs. When one change breaks multiple tests.
+          </aside>
         </section>
 
         <section>
           Encourages good accessibility practices.
 
-					<aside class="notes">
-						By not providing CSS node selectors, it encourages adoption of clear,
-						unambiguous labels, titles and alt text.
-					</aside>
+          <aside class="notes">
+            By not providing CSS node selectors, it encourages adoption of
+            clear, unambiguous labels, titles and alt text.
+          </aside>
+        </section>
+
+        <section>Simple and lightweight.</section>
+
+        <section>
+          <a href="https://testing-examples.com">testing-examples.com</a>
         </section>
 
         <section>
-          Simple and lightweight.
-				</section>
+          <h3>Frameworks</h3>
 
-				<section>
-					<a href="https://testing-examples.com">testing-examples.com</a>
-				</section>
+          <ul>
+            <li>Angular</li>
+            <li>React</li>
+            <li>React Native</li>
+            <li>Preact</li>
+            <li>Svelte</li>
+            <li>Vue</li>
+          </ul>
+        </section>
 
-				<section>
-					<h3>Frameworks</h3>
+        <section>
+          <h3>Other testing tools</h3>
 
-					<ul>
-						<li>Angular</li>
-						<li>React</li>
-						<li>React Native</li>
-						<li>Preact</li>
-						<li>Svelte</li>
-						<li>Vue</li>
-					</ul>
-				</section>
+          <ul>
+            <li>Cypress</li>
+            <li>Puppeteer</li>
+            <li>TestCafe</li>
+          </ul>
+        </section>
 
-				<section>
-					<h3>Other testing tools</h3>
+        <section>
+          <h2>I ❤️ @testing-library</h2>
 
-					<ul>
-						<li>Cypress</li>
-						<li>Puppeteer</li>
-						<li>TestCafe</li>
-					</ul>
-				</section>
+          <ul>
+            <li>Delightful API.</li>
+            <li>Discourages testing implementation details.</li>
+            <li>Encourages accessible components.</li>
+          </ul>
 
-				<section>
-					<h2>I ❤️ @testing-library</h2>
+          <aside class="notes">
+            Not a silver bullet. Consider the tradeoffs. The further up the
+            render tree you go, and the further up the pyramid you go, the more
+            careful you’ll have to be to avoid duplication, brittleness, and
+            ambiguity.
+          </aside>
+        </section>
 
-					<ul>
-						<li>Delightful API.</li>
-						<li>Discourages testing implementation details.</li>
-						<li>Encourages accessible components.</li>
-					</ul>
+        <section>
+          <p>That is all.</p>
 
-					<aside class="notes">
-						Not a silver bullet.
-						Consider the tradeoffs.
-						The further up the render tree you go, and the further up the pyramid you go, the more careful you’ll have to be to avoid duplication, brittleness, and ambiguity.
-					</aside>
-				</section>
+          <h1>Thank you</h1>
 
-				<section>
-					<p>That is all.</p>
+          <p><a href="https://goblindegook.com">goblindegook.com</a></p>
+          <p><a href="https://twitter.com/goblindegook">@goblindegook</a></p>
+        </section>
+      </div>
+    </div>
 
-					<h1>Thank you</h1>
-
-					<p><a href="https://goblindegook.com">goblindegook.com</a></p>
-					<p><a href="https://twitter.com/goblindegook">@goblindegook</a></p>
-				</section>
-
-			</div>
-		</div>
-
-		<script src="/node_modules/reveal.js/dist/reveal.js"></script>
-		<script src="/node_modules/reveal.js/plugin/notes/notes.js"></script>
-		<script src="/node_modules/reveal.js/plugin/highlight/highlight.js"></script>
-		<script>
-			Reveal.initialize({
+    <script src="/node_modules/reveal.js/dist/reveal.js"></script>
+    <script src="/node_modules/reveal.js/plugin/notes/notes.js"></script>
+    <script src="/node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+    <script>
+      Reveal.initialize({
         hash: true,
-        transition: 'slide',
-				plugins: [ RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+        plugins: [RevealHighlight, RevealNotes],
+      })
+    </script>
+  </body>
 </html>
