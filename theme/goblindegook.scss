@@ -5,10 +5,9 @@
  * This theme is Copyright (C) 2012-2013 Owen Versteeg, http://owenversteeg.com - it is MIT licensed.
  */
 
-
 // Default mixins and settings -----------------
-@import "../template/mixins";
-@import "../template/settings";
+@import 'reveal.js/css/theme/template/mixins';
+@import 'reveal.js/css/theme/template/settings';
 // ---------------------------------------------
 
 // Include theme-specific fonts
@@ -19,7 +18,7 @@
 $mainFont: Alegreya, serif;
 $mainColor: #111;
 $headingFont: Alegreya, serif;
-$headingColor: #383D3D;
+$headingColor: #383d3d;
 $headingTextShadow: none;
 $headingTextTransform: none;
 $heading1Size: 1.728em;
@@ -28,8 +27,8 @@ $heading3Size: 1.2em;
 $heading4Size: 1em;
 $backgroundColor: #fafafa;
 $linkColor: #be9d31;
-$linkColorHover: lighten( $linkColor, 20% );
-$selectionBackgroundColor: #26351C;
+$linkColorHover: lighten($linkColor, 20%);
+$selectionBackgroundColor: #26351c;
 $codeFont: 'Fira Code', monospace;
 
 .reveal a {
@@ -39,14 +38,13 @@ $codeFont: 'Fira Code', monospace;
 // Change text colors against dark slide backgrounds
 @include dark-bg-text-color(#fff);
 
-
 // Theme template ------------------------------
-@import "../template/theme";
+@import 'reveal.js/css/theme/template/theme';
 // ---------------------------------------------
 
 .reveal .slides section,
 .reveal .slides section > section {
-	line-height: 1.6;
+  line-height: 1.6;
 }
 
 .reveal h1 {
@@ -78,5 +76,3 @@ $codeFont: 'Fira Code', monospace;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
   }
 }
-
-

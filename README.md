@@ -1,3 +1,3 @@
 # Talks
 
-[![Tests](https://github.com/goblindegook/talks/workflows/tests/badge.svg)](https://github.com/goblindegook/talks/actions)
+Talk slides powered by [Reveal.js](https://revealjs.com).
