@@ -48,10 +48,10 @@
         <section>
           <h3>Browser Tests</h3>
           <ul class="emoji">
-            <li class="nope">Convenient</li>
-            <li class="nope">Fast</li>
-            <li class="nope">Maintainable</li>
-            <li class="nope">Robust</li>
+            <li data-emoji="❌">Convenient</li>
+            <li data-emoji="❌">Fast</li>
+            <li data-emoji="❌">Maintainable</li>
+            <li data-emoji="❌">Robust</li>
           </ul>
 
           <aside class="notes">
@@ -61,27 +61,20 @@
         </section>
 
         <section>
-          <h3>Enzyme</h3>
+          <h3>React + Enzyme</h3>
           <ul class="emoji">
-            <li class="okay">Convenient</li>
-            <li class="okay">Fast</li>
-            <li class="meh">Maintainable</li>
-            <li class="meh">Robust</li>
+            <li data-emoji="✅">Convenient</li>
+            <li data-emoji="✅">Fast</li>
+            <li data-emoji="🤷‍♀️">Maintainable</li>
+            <li data-emoji="🤷‍♀️">Robust</li>
           </ul>
         </section>
 
         <section>
-          Enzyme made it too easy to test implementation details.
-
-          <aside class="notes">
-            Primarily shallow rendering. But also selection by component name
-            and component instance state and property inspection.
-          </aside>
+          <p>Shallow rendering.</p>
         </section>
 
         <section>
-          <h3>Shallow rendering</h3>
-
           TODO: Redo diagram to explain shallow rendering
 
           <aside class="notes">
@@ -91,20 +84,40 @@
         </section>
 
         <section>
-          <h1>💔</h1>
+          <h3>Too easy to test implementation details</h3>
+
+          <ul>
+            <li>Shallow rendering.</li>
+            <li>Select by component name or props.</li>
+            <li>Component instance state inspection.</li>
+          </ul>
 
           <aside class="notes">
-            Testing implementation details limits your ability to refactor. If
-            tests are constantly breaking for no good reason, you’ll stop
-            testing. Tests with shallow rendering are prone to break when
-            components or component structure change, even if presentation and
-            behaviour remains the same.
+            Testing implementation details limits your ability to refactor.
+            Refactoring is one of the most important approaches to tackling tech
+            debt. You don’t want to have your hands tied here. If tests are
+            constantly breaking for no good reason, you’ll stop testing. Tests
+            with shallow rendering are prone to break when components or
+            component structure change, even if presentation and behaviour
+            remains the same.
           </aside>
         </section>
 
-        <section
-          data-background-image="/assets/testing-library/pyramid.jpg"
-        ></section>
+        <section>
+          <ul class="emoji">
+            <li data-emoji="💔">Testing via the browser.</li>
+            <li data-emoji="💔">Testing implementation details.</li>
+          </ul>
+
+          <aside class="notes">So what should we test?</aside>
+        </section>
+
+        <section data-background-image="/assets/testing-library/pyramid.jpg">
+          <aside class="notes">
+            This wouldn't be a proper talk about tests if it didn't have the
+            pyramid.
+          </aside>
+        </section>
 
         <section
           data-background-image="/assets/testing-library/pyramid.jpg"
@@ -143,13 +156,27 @@
         </section>
 
         <section>
-          <p>The messy middle.</p>
+          <h2>The messy middle</h2>
 
           <aside class="notes">
             The definitions of ‘unit test’ and ‘integration test’ are a bit
             wishy-washy. And is it 'integration', 'integrated', 'service',
             or...?
           </aside>
+        </section>
+
+        <section>
+          <blockquote>
+            <p>“Write tests. Not too many. Mostly integration.”</p>
+            <cite>Guillermo Rauch</cite>
+          </blockquote>
+        </section>
+
+        <section>
+          <blockquote>
+            <p>“Integrated tests are a scam.”</p>
+            <cite>J.B. Rainsberger</cite>
+          </blockquote>
         </section>
 
         <section>
@@ -178,8 +205,8 @@
 
         <section>
           <p>
-            The <em>unit</em> is whatever makes sense, tested at a level that
-            makes sense.
+            The <em>unit</em> is whatever makes sense,<br />
+            tested at a level that makes sense.
           </p>
 
           <aside class="notes">
@@ -203,18 +230,20 @@
         </section>
 
         <section>
-          <p>Refactoring should not break tests.</p>
+          <h2>Fake it till you break it</h2>
+        </section>
 
-          <aside class="notes">
-            Refactoring is one of the most important approaches to tackling tech
-            debt. You don’t want to have your hands tied here.
-          </aside>
+        <section>
+          <blockquote>
+            <p>“Mocking is a code smell.”</p>
+            <cite>Eric Elliot</cite>
+          </blockquote>
         </section>
 
         <section>
           <p>
-            Your unit tests based on shallow rendering are green... but the
-            application is broken.
+            When your tests are green<br />
+            but the application is broken.
           </p>
 
           <aside class="notes">
@@ -226,11 +255,13 @@
         </section>
 
         <section>
-          <p>You don't test third party components</p>
-          <p><em>but...</em></p>
+          <p>
+            You don’t need to test third-party code<br />
+            but maybe you should.
+          </p>
 
           <aside class="notes">
-            You still need to be sure the application works. What’s the point of
+            You still need to ensure the application works. What’s the point of
             having all green unit tests if some untested component or
             integration breaks the application? Don’t fake or mock components
             unless you’re doing it to avoid a) shared state that breaks test
@@ -239,18 +270,7 @@
         </section>
 
         <section>
-          <ol>
-            <li>Write a test to drive the implementation or integration.</li>
-            <li>Do whatever makes the test pass.</li>
-          </ol>
-
-          <aside class="notes">
-            Again, I don't care <em>which</em> components implement the feature.
-          </aside>
-        </section>
-
-        <section>
-          <a href="https://testing-library.com">testing-library.com</a>
+          <h2><a href="https://testing-library.com">@testing-library</a></h2>
         </section>
 
         <section>
@@ -393,7 +413,7 @@
         </section>
 
         <section>
-          Encourages good accessibility practices.
+          Promotes good accessibility practices.
 
           <aside class="notes">
             By not providing CSS node selectors, it encourages adoption of
@@ -431,12 +451,10 @@
         </section>
 
         <section>
-          <h2>I ❤️ @testing-library</h2>
-
-          <ul>
-            <li>Delightful API.</li>
-            <li>Discourages testing implementation details.</li>
-            <li>Encourages accessible components.</li>
+          <ul class="emoji">
+            <li data-emoji="❤️">Delightful API.</li>
+            <li data-emoji="❤️">Discourages testing implementation details.</li>
+            <li data-emoji="❤️">Promotes creating accessible components.</li>
           </ul>
 
           <aside class="notes">
