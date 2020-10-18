@@ -354,25 +354,40 @@
         </section>
 
         <section>
-          <pre><code data-trim data-noescape data-line-numbers="5-7|9">
-						<script type="text/template">
-							test('has a delete button', () => {
-								const data = { id: '9999', name: 'Test entry.' }
-								const handleDelete = jest.fn()
+          <h3>React</h3>
+          <pre><code data-trim data-noescape data-line-numbers="1,5-6">
+            <script type="text/template">
+              import { render, screen } from '@testing-library/react'
+              import Component from './Component.jsx'
 
-								const { getByText, findByText } = render(
-									<Entry data={data} onDelete={handleDelete} />
-								)
-
-								const input = getByText(/Delete/i)
-								expect(input.type).toBe('button')
-							})
+              test('show the name', () => {
+                render(<Component name='Test Name' />)
+                screen.getByText(/Test Name/)
+              })
 						</script>
 					</code></pre>
         </section>
 
         <section>
-          What you get back is DOM nodes.
+          <h3>Plain HTML</h3>
+          <pre><code data-trim data-noescape data-line-numbers="1,9">
+            <script type="text/template">
+              import { screen } from '@testing-library/dom'
+              import { compile } from 'handlebars'
+              import template from './template.hbs'
+
+              const render = compile(template)
+
+              test('show the name', () => {
+                document.innerHTML = render({ name: 'Test Name' })
+                screen.getByText(/Test Name/)
+              })
+						</script>
+					</code></pre>
+        </section>
+
+        <section>
+          <p>What you get back is DOM nodes.</p>
 
           <aside class="notes">
             No wrappers around React components. Reimplement the component in
@@ -387,26 +402,23 @@
         </section>
 
         <section>
-          <pre><code data-trim data-noescape data-line-numbers="4-6|8-9">
+          <pre><code data-trim data-noescape data-line-numbers="3|5-6">
 						<script type="text/template">
-						test('deletes entry after animation', () => {
-              const data = { id: '9999', name: 'Test entry.' }
+            test('delete entry after animation', async () => {
               const handleDelete = jest.fn()
-              const { getByText, findByText } = render(
-                <Entry data={data} onDelete={handleDelete} />
-              )
+              render(<Entry id='9999' onDelete={handleDelete} />)
 
-              fireEvent.click(getByText(/Delete/i))
-              fireEvent.click(await findByText(/Confirm/i))
+              fireEvent.click(screen.getByText(/Delete/i))
+              fireEvent.click(await screen.findByText(/Confirm/i))
 
               expect(handleDelete).toHaveBeenCalledWith('9999')
-						})
+            })
 						</script>
 					</code></pre>
         </section>
 
         <section>
-          Encourages <em>not</em> testing implementation details.
+          <p>Encourages <em>not</em> testing implementation details.</p>
 
           <aside class="notes">
             Beware the tradeoffs: Having to write many similar tests for all
@@ -415,7 +427,7 @@
         </section>
 
         <section>
-          Promotes good accessibility practices.
+          <p>Promotes good accessibility practices.</p>
 
           <aside class="notes">
             By not providing CSS node selectors, it encourages adoption of
@@ -430,8 +442,8 @@
         </section>
 
         <section>
+          <h3>Frameworks</h3>
           <ul>
-            <li>Plain HTML</li>
             <li>Angular</li>
             <li>React (Native)</li>
             <li>Preact</li>
