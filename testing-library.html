@@ -327,13 +327,13 @@
               <td style="vertical-align: middle">+</td>
               <td style="vertical-align: middle">
                 <p>
-                  <code>ByText()</code><br />
+                  <code>ByRole()</code><br />
                   <code>ByLabelText()</code><br />
                   <code>ByPlaceholderText()</code><br />
-                  <code>ByAltText()</code><br />
-                  <code>ByTitle()</code><br />
+                  <code>ByText()</code><br />
                   <code>ByDisplayValue()</code><br />
-                  <code>ByRole()</code>
+                  <code>ByAltText()</code><br />
+                  <code>ByTitle()</code>
                 </p>
               </td>
             </tr>
@@ -346,13 +346,31 @@
         </section>
 
         <section>
+          <ol>
+            <li><code>getByRole()</code></li>
+            <li><code>getByLabelText()</code></li>
+            <li><code>getByPlaceholderText()</code></li>
+            <li><code>getByText()</code></li>
+            <li><code>getByDisplayValue()</code></li>
+            <li><code>getByAltText()</code></li>
+            <li><code>getByTitle()</code></li>
+          </ol>
+
+          <aside class="notes">
+            The recommended order of queries to use. From accessible to
+            semantic. Alt text and title are not consistently handled by
+            assistive technologies.
+          </aside>
+        </section>
+
+        <section>
           <h3>Escape hatch</h3>
 
           <p><code>getByTestId()</code></p>
 
           <aside class="notes">
-            Last resort if all else fails. Does not overload other IDs or
-            classes for testing.
+            Last resort if all else fails (dynamic text, etc.) It does not
+            overload other IDs or classes for testing.
           </aside>
         </section>
 
