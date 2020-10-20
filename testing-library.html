@@ -229,7 +229,10 @@
           </aside>
         </section>
 
-        <section>
+        <section
+          data-background-image="/assets/testing-library/mouth.jpg"
+          data-background-opacity="0.3"
+        >
           <h2>Fake it till you break it</h2>
         </section>
 
@@ -300,7 +303,7 @@
         <section>
           <h3>More this</h3>
           <pre><code data-trim data-lang="js">
-							fireEvent.click(getByText(/recover password/i))
+							fireEvent.click(screen.getByText(/recover password/i))
 					</code></pre>
         </section>
 
@@ -397,7 +400,7 @@
 
         <section>
           <pre><code data-trim>
-							fireEvent.click(getByText('Click me!'))
+							fireEvent.click(screen.getByText('Click me!'))
 					</code></pre>
         </section>
 
