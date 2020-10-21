@@ -39,9 +39,12 @@
           </p>
 
           <aside class="notes">
-            The point of testing is to be able to develop, debug, and deploy
-            with confidence. Don't go chasing metrics or prescribed formulas.
-            Ask, "Does this test give me confidence?"
+            <p>
+              The point of testing is to be able to develop, debug, and deploy
+              with confidence.
+            </p>
+            <p>Don't go chasing metrics or prescribed formulas.</p>
+            <p>Ask, "Does this test give me confidence?"</p>
           </aside>
         </section>
 
@@ -58,8 +61,10 @@
           </ul>
 
           <aside class="notes">
-            Tests are complicated and hard to setup, slow AF, (Cu)cumbersome
-            changes, tests break all the time.
+            <p>
+              Tests are complicated and hard to setup, slow AF, with
+              (Cu)cumbersome changes, and break all the time.
+            </p>
           </aside>
         </section>
 
@@ -78,23 +83,19 @@
 
         <section>
           <p>Shallow rendering.</p>
-        </section>
-
-        <section>
-          TODO: Redo diagram to explain shallow rendering
 
           <aside class="notes">
-            Allows ‘testing a component as a unit’, and ensures tests aren’t
+            Allows ‘testing isolated components’, and ensures tests aren’t
             indirectly asserting on behavior of child components.
           </aside>
         </section>
 
         <section>
-          <h3>Too easy to test implementation details</h3>
+          <h3>Too easy to test implementation details.</h3>
 
           <ul>
             <li>Shallow rendering.</li>
-            <li>Select by component name or props.</li>
+            <li>Querying by component name or properties.</li>
             <li>Component instance state inspection.</li>
           </ul>
 
@@ -138,9 +139,9 @@
           data-background-image="/assets/testing-library/pyramid.jpg"
           data-background-opacity="0.2"
         >
-          <p>Expensive to maintain</p>
+          <p>Expensive</p>
           <p>↕</p>
-          <p>Cheap to maintain</p>
+          <p>Cheap</p>
         </section>
 
         <section
