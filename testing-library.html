@@ -45,7 +45,10 @@
           </aside>
         </section>
 
-        <section>
+        <section
+          data-background-image="/assets/testing-library/drake-no.jpg"
+          data-background-opacity="0.4"
+        >
           <h3>Browser Tests</h3>
           <ul class="emoji">
             <li data-emoji="❌">Convenient</li>
@@ -60,7 +63,10 @@
           </aside>
         </section>
 
-        <section>
+        <section
+          data-background-image="/assets/testing-library/drake-yes.jpg"
+          data-background-opacity="0.4"
+        >
           <h3>React + Enzyme</h3>
           <ul class="emoji">
             <li data-emoji="✅">Convenient</li>
@@ -105,7 +111,7 @@
 
         <section>
           <ul class="emoji">
-            <li data-emoji="💔">Testing via the browser.</li>
+            <li data-emoji="💔">Testing only via the browser.</li>
             <li data-emoji="💔">Testing implementation details.</li>
           </ul>
 
@@ -123,27 +129,18 @@
           data-background-image="/assets/testing-library/pyramid.jpg"
           data-background-opacity="0.2"
         >
-          <p>Slower</p>
+          <p>Slow</p>
           <p>↕</p>
-          <p>Faster</p>
+          <p>Fast</p>
         </section>
 
         <section
           data-background-image="/assets/testing-library/pyramid.jpg"
           data-background-opacity="0.2"
         >
-          <p>More Expensive</p>
+          <p>Expensive to maintain</p>
           <p>↕</p>
-          <p>Cheaper</p>
-        </section>
-
-        <section
-          data-background-image="/assets/testing-library/pyramid.jpg"
-          data-background-opacity="0.2"
-        >
-          <p>Big Picture</p>
-          <p>↕</p>
-          <p>Detail</p>
+          <p>Cheap to maintain</p>
         </section>
 
         <section
@@ -152,7 +149,45 @@
         >
           <p>Cooperation</p>
           <p>↕</p>
-          <p>Single Responsibility</p>
+          <p>Single responsibility</p>
+        </section>
+
+        <section
+          data-background-image="/assets/testing-library/pyramid.jpg"
+          data-background-opacity="0.2"
+        >
+          <p>Big picture</p>
+          <p>↕</p>
+          <p>Detail</p>
+        </section>
+
+        <section
+          data-background-image="/assets/testing-library/pyramid.jpg"
+          data-background-opacity="0.2"
+        >
+          <p>Loose</p>
+          <p>↕</p>
+          <p>Precise</p>
+
+          <aside class="notes">Pressure on software design.</aside>
+        </section>
+
+        <section
+          data-background-image="/assets/testing-library/pyramid.jpg"
+          data-background-opacity="0.2"
+        >
+          <p>Easy to refactor</p>
+          <p>↕</p>
+          <p>Hard to refactor</p>
+        </section>
+
+        <section
+          data-background-image="/assets/testing-library/pyramid.jpg"
+          data-background-opacity="0.2"
+        >
+          <p>Hard to debug</p>
+          <p>↕</p>
+          <p>Easy to debug</p>
         </section>
 
         <section>
@@ -184,9 +219,9 @@
 
           <aside class="notes">
             Misconceptions slot neatly into Enzyme's antipatterns. Isolation
-            does not mean mock everything else. It means the TEST ITSELF must be
-            isolated. It should be able to run by itself, in a sequence of
-            tests, or even in parallel.
+            (according to Kent Beck) does not mean mock everything else. It
+            means the TEST ITSELF must be isolated. It should be able to run by
+            itself, in a sequence of tests, or even in parallel.
           </aside>
         </section>
 
@@ -198,22 +233,13 @@
           <p>A unit test must focus on a ‘small’ part of the system.</p>
 
           <aside class="notes">
-            "Small" does not mean "smallest". It's not about testing every
-            individual function or class of the system.
+            ‘Small’ does not mean ‘smallest’. It's not about testing every
+            individual function or class of the system. The behaviour of the SUT
+            is what matters, not its size or complexity.
           </aside>
         </section>
 
-        <section>
-          <p>
-            The <em>unit</em> is whatever makes sense,<br />
-            tested at a level that makes sense.
-          </p>
-
-          <aside class="notes">
-            A test is described by how it handles itself, not by the size or
-            complexity of the component it's testing.
-          </aside>
-        </section>
+        <section>Testing from the outside-in.</section>
 
         <section>
           <h3>Stuff I don’t care about when doing TDD:</h3>
@@ -247,35 +273,30 @@
           <ul class="emoji">
             <li data-emoji="💯">100% code coverage.</li>
             <li data-emoji="✅">All tests are green.</li>
-            <li data-emoji="💩">The application is still broken.</li>
+            <li class="fragment fade-in" data-emoji="💩">
+              The application is still broken.
+            </li>
           </ul>
 
           <aside class="notes">
             Shallow rendering/mocking is how you can have 100% test coverage
-            with a broken application. You're missing the point of tests.
-            Changing potentially untested subcomponents. Third-party components
-            break but tests never exercise them.
+            with a broken application. It's false confidence and you're missing
+            the point of tests.
           </aside>
         </section>
 
         <section>
-          <h3>Also</h3>
-          <p>
-            You don’t need to test third-party code<br />
-            but maybe you should.
-          </p>
+          <p>You don’t need to test third-party components.</p>
+          <p class="fragment fade-in">But maybe you should.</p>
 
           <aside class="notes">
-            You still need to ensure the application works. What’s the point of
+            Tests should exercise integration with third party components — you
+            still need to ensure the application works. What’s the point of
             having all green unit tests if some untested component or
             integration breaks the application? Don’t fake or mock components
             unless you’re doing it to avoid a) shared state that breaks test
-            isolation, b) slowness, c) setup complexity, or d) unpredictability.
+            isolation, b) slowness, or c) unpredictability.
           </aside>
-        </section>
-
-        <section>
-          <h2><a href="https://testing-library.com">@testing-library</a></h2>
         </section>
 
         <section>
@@ -286,6 +307,10 @@
             </p>
             <cite>Kent C. Dodds</cite>
           </blockquote>
+        </section>
+
+        <section>
+          <h2><a href="https://testing-library.com">@testing-library</a></h2>
         </section>
 
         <section>
@@ -442,8 +467,8 @@
           <p>Encourages <em>not</em> testing implementation details.</p>
 
           <aside class="notes">
-            Beware the tradeoffs: Having to write many similar tests for all
-            possible outputs. When one change breaks multiple tests.
+            Beware the tradeoffs: Having to write many similar tests for input
+            combinations where one change might break multiple tests.
           </aside>
         </section>
 
@@ -452,7 +477,7 @@
 
           <aside class="notes">
             By not providing CSS node selectors, it encourages adoption of
-            clear, unambiguous labels, titles and alt text.
+            correct ARIA roles, and clear, unambiguous text.
           </aside>
         </section>
 
@@ -484,16 +509,31 @@
 
         <section>
           <ul class="emoji">
-            <li data-emoji="❤️">Delightful API.</li>
+            <li data-emoji="❤️">Delightful, user-centric API.</li>
             <li data-emoji="❤️">Discourages testing implementation details.</li>
-            <li data-emoji="❤️">Promotes creating accessible components.</li>
+            <li data-emoji="❤️">Promotes creating accessible frontends.</li>
           </ul>
+        </section>
+
+        <section>
+          <p>Learn the tradeoffs.</p>
 
           <aside class="notes">
             Not a silver bullet. Consider the tradeoffs. The further up the
             render tree you go, and the further up the pyramid you go, the more
             careful you’ll have to be to avoid duplication, brittleness, and
             ambiguity.
+          </aside>
+        </section>
+
+        <section>
+          <p>Test with <em>confidence</em>.</p>
+
+          <aside class="notes">
+            The point of testing is to be able to develop, debug, and deploy
+            with confidence. We don't write tests for the sake of having tests.
+            If a test doesn't give you confidence, or add to the confidence you
+            already have, do you need it?
           </aside>
         </section>
 
@@ -506,6 +546,9 @@
           <p><a href="https://twitter.com/goblindegook">@goblindegook</a></p>
         </section>
       </div>
+      <footer class="contact">
+        <a href="https://twitter.com/goblindegook">@goblindegook</a>
+      </footer>
     </div>
 
     <script src="/node_modules/reveal.js/dist/reveal.js"></script>

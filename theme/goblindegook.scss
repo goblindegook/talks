@@ -85,3 +85,14 @@ $codeFont: 'Fira Code', monospace;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
   }
 }
+
+footer.contact {
+  position: absolute;
+  top: auto;
+  bottom: 1.4em;
+  left: 1em;
+  right: auto;
+  z-index: 11;
+  font-size: 0.5em;
+  font-weight: 600;
+}
