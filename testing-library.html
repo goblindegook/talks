@@ -22,14 +22,26 @@
         <section>
           <h1>@testing-library</h1>
           <p><em>Or, how I learned to stop worrying about the DOM.</em></p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
           <hr />
           <p>LuxembourgJS · November 4, 2020</p>
         </section>
 
         <section>
           <h2>Luís Rodrigues</h2>
+          <p>&nbsp;</p>
           <p><a href="https://goblindegook.com">goblindegook.com</a></p>
-          <p><a href="https://twitter.com/goblindegook">@goblindegook</a></p>
+          <p>
+            <a href="https://twitter.com/goblindegook"
+              ><img
+                class="icon-twitter"
+                src="/assets/testing-library/twitter.svg"
+                alt="Twitter"
+              />
+              @goblindegook</a
+            >
+          </p>
         </section>
 
         <section>
@@ -291,12 +303,18 @@
           <p class="fragment fade-in">But maybe you should.</p>
 
           <aside class="notes">
-            Tests should exercise integration with third party components — you
-            still need to ensure the application works. What’s the point of
-            having all green unit tests if some untested component or
-            integration breaks the application? Don’t fake or mock components
-            unless you’re doing it to avoid a) shared state that breaks test
-            isolation, b) slowness, or c) unpredictability.
+            <p>
+              Tests should exercise integration with third party components
+              because you still need to ensure the application works. What’s the
+              point of having all green unit tests if some untested component or
+              integration breaks the application? Don’t fake or mock components
+              unless you’re doing it to avoid a) shared state that breaks test
+              isolation, b) slowness, or c) unpredictability.
+            </p>
+            <p>
+              Confidence comes from tests reproducing reality, and you can't
+              have it if your tests are overloaded with fakes.
+            </p>
           </aside>
         </section>
 
@@ -330,7 +348,14 @@
           <h3>More this</h3>
           <pre><code data-trim data-lang="js">
 							fireEvent.click(screen.getByText(/recover password/i))
-					</code></pre>
+          </code></pre>
+
+          <aside class="notes">
+            testing-library improves on the traditional selector interface by
+            letting you use what the user experiences on the interface with
+            minimal ties to the document's element implementation (structure,
+            classes, IDs, etc).
+          </aside>
         </section>
 
         <section>
@@ -489,6 +514,10 @@
         </section>
 
         <section>
+          <a href="https://testing-playground.com">testing-playground.com</a>
+        </section>
+
+        <section>
           <h3>Frameworks</h3>
           <ul>
             <li>Angular</li>
@@ -531,10 +560,17 @@
           <p>Test with <em>confidence</em>.</p>
 
           <aside class="notes">
-            The point of testing is to be able to develop, debug, and deploy
-            with confidence. We don't write tests for the sake of having tests.
-            If a test doesn't give you confidence, or add to the confidence you
-            already have, do you need it?
+            <p>
+              One thing I'm grateful to testing-library for is that it forced me
+              not only to rethink <em>how</em> I write tests, but <em>why</em> I
+              write them.
+            </p>
+            <p>
+              The point of testing is to be able to develop, debug, and deploy
+              with confidence. We don't write tests for the sake of having
+              tests. If a test doesn't give you confidence, or add to the
+              confidence you already have, do you need it?
+            </p>
           </aside>
         </section>
 
@@ -543,8 +579,19 @@
 
           <h1>Thank you</h1>
 
+          <p>&nbsp;</p>
+
           <p><a href="https://goblindegook.com">goblindegook.com</a></p>
-          <p><a href="https://twitter.com/goblindegook">@goblindegook</a></p>
+          <p>
+            <a href="https://twitter.com/goblindegook"
+              ><img
+                class="icon-twitter"
+                src="/assets/testing-library/twitter.svg"
+                alt="Twitter"
+              />
+              @goblindegook</a
+            >
+          </p>
         </section>
       </div>
       <footer class="contact">

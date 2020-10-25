@@ -20,7 +20,7 @@
     "gulp-clean-css": "^4.2.0",
     "gulp-connect": "^5.7.0",
     "gulp-sass": "^4.0.2",
-    "yargs": "^15.1.0"
+    "yargs": "^16.1.0"
   },
   "browserslist": "> 0.5%, IE 11, not dead"
 }
