@@ -5,6 +5,9 @@
  * This theme is Copyright (C) 2012-2013 Owen Versteeg, http://owenversteeg.com - it is MIT licensed.
  */
 
+@import './reset';
+@import 'reveal.js/dist/reveal';
+
 // Default mixins and settings -----------------
 @import 'reveal.js/css/theme/template/mixins';
 @import 'reveal.js/css/theme/template/settings';
