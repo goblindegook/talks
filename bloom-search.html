@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Searching with Bloom Filters</title>
+    <link rel="stylesheet" href="dist/theme/goblindegook.css" id="theme" />
+    <link
+      rel="stylesheet"
+      href="dist/plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Searching with Bloom Filters</h1>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <hr />
+          <p>Bolt Talks · March 18, 2021</p>
+        </section>
+
+        <section>
+          <h2>Luís Rodrigues</h2>
+          <p>&nbsp;</p>
+          <p><a href="https://goblindegook.com">goblindegook.com</a></p>
+          <p>
+            <a href="https://twitter.com/goblindegook"
+              ><img
+                class="icon-twitter"
+                src="assets/common/twitter.svg"
+                alt="Twitter"
+              />
+              @goblindegook</a
+            >
+          </p>
+        </section>
+
+        <section>
+          <h2>The problem</h2>
+          <p>&nbsp;</p>
+          <p>Letting readers search my static sites.</p>
+        </section>
+
+        <section>
+          <h2>The solution</h2>
+          <p>&nbsp;</p>
+          <p>Integrating Lunr with a prebuilt search index.</p>
+
+          <aside class="notes">
+            Lunr: "Like Solr, but much smaller and not as bright."
+          </aside>
+        </section>
+
+        <section>
+          <h2>That works, but...</h2>
+          <p>&nbsp;</p>
+          <p>Visitors have to download an <u>8 MB</u> index file.</p>
+        </section>
+
+        <section>
+          <p>Could I have a search index for less?</p>
+        </section>
+
+        <section>
+          <h2>Bloom filters</h2>
+        </section>
+
+        <section>
+          <p>&ldquo;Is &lt;this thing&gt; in &lt;that group&gt;?&rdquo;</p>
+
+          <aside class="notes">
+            Bloom filters were designed to answer a question.
+          </aside>
+        </section>
+
+        <section>
+          <p>&ldquo;Is <u>this word</u> in <u>that document</u>?&rdquo;</p>
+
+          <aside class="notes">
+            In my case, it's about words in a document.
+          </aside>
+        </section>
+
+        <section>
+          <ul class="emoji">
+            <li data-emoji="❌">&ldquo;Definitely not.&rdquo;</li>
+            <li data-emoji="🤔">&ldquo;Possibly yes.&rdquo;</li>
+          </ul>
+
+          <aside class="notes">
+            <p>
+              Because of their size, Bloom filters trade away some
+              sophistication.
+            </p>
+            <p>
+              There is a false positive error rate associated with "yes"
+              answers.
+            </p>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Building blocks</h3>
+          <ul>
+            <li>An array of <i>n</i> bits.</li>
+            <li><i>m</i> independent hash functions.</li>
+          </ul>
+
+          <aside class="notes">
+            <p>
+              You can find optimal values for N and M based on the size of the
+              group you plan to add to the Bloom filter and the desired false
+              positive error rate.
+            </p>
+          </aside>
+        </section>
+
+        <section>
+          <h2>Example</h2>
+          <p>(100 bits, 4 hash functions)</p>
+        </section>
+
+        <section>
+          <p>Add DOG to the filter.</p>
+        </section>
+
+        <section>
+          <img
+            src="assets/bloom-search/bloom-filter-1.svg"
+            alt="Adding DOG to a simple bloom filter."
+          />
+        </section>
+
+        <section>
+          <p>Add CAT to the filter.</p>
+        </section>
+
+        <section>
+          <img
+            src="assets/bloom-search/bloom-filter-2.svg"
+            alt="Adding CAT to a bloom filter."
+          />
+        </section>
+
+        <section>
+          <p>Is DOG in the filter?</p>
+        </section>
+
+        <section>
+          <img
+            src="assets/bloom-search/bloom-filter-3.svg"
+            alt="Looking up DOG in a bloom filter: found."
+          />
+        </section>
+
+        <section>
+          <p>Is MOUSE in the filter?</p>
+        </section>
+
+        <section>
+          <img
+            src="assets/bloom-search/bloom-filter-4.svg"
+            alt="Looking up MOUSE in a bloom filter: found."
+          />
+        </section>
+
+        <section>
+          <p>Is COW in the filter?</p>
+        </section>
+
+        <section>
+          <img
+            src="assets/bloom-search/bloom-filter-5.svg"
+            alt="Looking up COW in a bloom filter: false positive."
+          />
+        </section>
+
+        <section>
+          <p>NPM</p>
+          <h2>
+            <a href="https://www.npmjs.com/package/@pacote/bloom-search"
+              >@pacote/bloom-search</a
+            >
+          </h2>
+        </section>
+
+        <section>
+          <p>That is all.</p>
+
+          <h1>Thank you</h1>
+
+          <p>&nbsp;</p>
+
+          <p><a href="https://goblindegook.com">goblindegook.com</a></p>
+          <p>
+            <a href="https://twitter.com/goblindegook"
+              ><img
+                class="icon-twitter"
+                src="assets/common/twitter.svg"
+                alt="Twitter"
+              />
+              @goblindegook</a
+            >
+          </p>
+        </section>
+      </div>
+      <footer class="contact">
+        <a href="https://twitter.com/goblindegook">@goblindegook</a>
+      </footer>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="dist/plugin/notes/notes.js"></script>
+    <script src="dist/plugin/highlight/highlight.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        plugins: [RevealHighlight, RevealNotes],
+      })
+    </script>
+  </body>
+</html>

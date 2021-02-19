@@ -54,6 +54,10 @@ $codeFont: 'Fira Code', monospace;
   font-family: 'Alegreya SC', $headingFont;
 }
 
+.reveal i {
+  font-style: italic;
+}
+
 .reveal .emoji li {
   list-style-type: none;
 

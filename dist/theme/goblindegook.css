@@ -1923,6 +1923,9 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 .reveal h1 {
   font-family: "Alegreya SC", Alegreya, serif; }
 
+.reveal i {
+  font-style: italic; }
+
 .reveal .emoji li {
   list-style-type: none; }
   .reveal .emoji li::before {
