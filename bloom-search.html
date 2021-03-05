@@ -50,7 +50,7 @@
         <section>
           <h2>The solution</h2>
           <p>&nbsp;</p>
-          <p>Integrating Lunr with a prebuilt search index.</p>
+          <h3>Lunr<br /><a href="https://lunrjs.com/">lunrjs.com</a></h3>
 
           <aside class="notes">
             Lunr: "Like Solr, but much smaller and not as bright."
@@ -58,9 +58,13 @@
         </section>
 
         <section>
+          <p>Inverted indices on the browser.</p>
+        </section>
+
+        <section>
           <h2>That works, but...</h2>
           <p>&nbsp;</p>
-          <p>Visitors have to download an <u>8 MB</u> index file.</p>
+          <p>Visitors had to download an <u>8 MB</u> index file.</p>
         </section>
 
         <section>
@@ -122,6 +126,28 @@
         </section>
 
         <section>
+          <h3>Hash function</h3>
+          <p>&nbsp;</p>
+          <p><i>data (any size)</i> → <i>value (fixed size)</i></p>
+          <aside class="notes">
+            <p>
+              For example, a function that turns a word into a number between 0
+              and 1000.
+            </p>
+            <p>
+              This result must be deterministic: the same data input always
+              produces the same output value.
+            </p>
+            <p>
+              In a perfect world, different data fed into a hash function would
+              yield a different result. But because of the fixed size,
+              collisions happen, and that is the why we get false positives from
+              Bloom filters.
+            </p>
+          </aside>
+        </section>
+
+        <section>
           <h2>Example</h2>
           <p>(100 bits, 4 hash functions)</p>
         </section>
@@ -133,7 +159,7 @@
         <section>
           <img
             src="assets/bloom-search/bloom-filter-1.svg"
-            alt="Adding DOG to a simple bloom filter."
+            alt="Adding DOG to a simple Bloom filter."
           />
         </section>
 
@@ -144,7 +170,7 @@
         <section>
           <img
             src="assets/bloom-search/bloom-filter-2.svg"
-            alt="Adding CAT to a bloom filter."
+            alt="Adding CAT to a Bloom filter."
           />
         </section>
 
@@ -155,7 +181,7 @@
         <section>
           <img
             src="assets/bloom-search/bloom-filter-3.svg"
-            alt="Looking up DOG in a bloom filter: found."
+            alt="Looking up DOG in a Bloom filter: found."
           />
         </section>
 
@@ -166,7 +192,7 @@
         <section>
           <img
             src="assets/bloom-search/bloom-filter-4.svg"
-            alt="Looking up MOUSE in a bloom filter: found."
+            alt="Looking up MOUSE in a Bloom filter: found."
           />
         </section>
 
@@ -177,9 +203,30 @@
         <section>
           <img
             src="assets/bloom-search/bloom-filter-5.svg"
-            alt="Looking up COW in a bloom filter: false positive."
+            alt="Looking up COW in a Bloom filter: false positive."
           />
         </section>
+
+        <section>
+          <h2>Counting Bloom filters</h2>
+          <p>&nbsp;</p>
+          <p>Relevant search results by term frequency.</p>
+        </section>
+
+        <section>
+          <img
+            src="assets/bloom-search/counting-bloom-filter.svg"
+            alt="Adding COW to a counting Bloom filter."
+          />
+        </section>
+
+        <section>
+          <h2>Searching the site</h2>
+          <p>&nbsp;</p>
+          <p>One Bloom filter per document.</p>
+        </section>
+
+        <section>TODO: Diagram</section>
 
         <section>
           <p>NPM</p>
@@ -188,6 +235,17 @@
               >@pacote/bloom-search</a
             >
           </h2>
+        </section>
+
+        <section>
+          <h2>Try it</h2>
+          <p>&nbsp;</p>
+          <p>
+            <a href="https://fantasticmetropolis.com/"
+              >fantasticmetropolis.com</a
+            >
+          </p>
+          <p><a href="https://goblindegook.com/">goblindegook.com</a></p>
         </section>
 
         <section>
