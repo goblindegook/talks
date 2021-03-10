@@ -118,6 +118,10 @@
 
           <aside class="notes">
             <p>
+              We use hashes to enter data into our filter array in a way that is
+              probabilistically uniform.
+            </p>
+            <p>
               You can find optimal values for N and M based on the size of the
               group you plan to add to the Bloom filter and the desired false
               positive error rate.
@@ -143,6 +147,38 @@
               yield a different result. But because of the fixed size,
               collisions happen, and that is the why we get false positives from
               Bloom filters.
+            </p>
+          </aside>
+        </section>
+
+        <section>
+          <p>
+            Where am I supposed to find<br /><i>m</i> independent hash
+            functions?
+          </p>
+
+          <aside class="notes">
+            <p>
+              Thanks to a method called double hashing, you only need two hash
+              functions to simulate the behaviour of an arbitrary number.
+            </p>
+          </aside>
+        </section>
+
+        <section>
+          <p>
+            <i>
+              g<sub>i</sub>(x) = h<sub>1</sub>(x) + ih<sub>2</sub>(x) + i<sup
+                >2</sup
+              >
+              mod n
+            </i>
+          </p>
+
+          <aside class="notes">
+            <p>
+              Thanks to a method called double hashing, you only need two hash
+              functions to simulate the behaviour of an arbitrary number.
             </p>
           </aside>
         </section>
