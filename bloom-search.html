@@ -22,7 +22,7 @@
           <p>&nbsp;</p>
           <p>&nbsp;</p>
           <hr />
-          <p>Bolt Talks · March 18, 2021</p>
+          <p>BOLT Talks · March 18, 2021</p>
         </section>
 
         <section>
@@ -70,13 +70,23 @@
 
         <section>
           <h2>Bloom filters</h2>
+
+          <aside class="notes">Bloom filters are very compact.</aside>
         </section>
 
         <section>
           <p>&ldquo;Is &lt;this thing&gt; in &lt;that group&gt;?&rdquo;</p>
+        </section>
+
+        <section>
+          <p>You&rsquo;ve likely used them already...</p>
+        </section>
+
+        <section>
+          <p>&ldquo;Is <u>this site</u> in <u>the naughty list</u>?&rdquo;</p>
 
           <aside class="notes">
-            Bloom filters were designed to answer a question.
+            Google Chrome malicious site check example.
           </aside>
         </section>
 
@@ -153,16 +163,6 @@
             Where am I supposed to find<br /><i>m</i> independent hash
             functions?
           </p>
-
-          <aside class="notes">
-            <p>
-              Thanks to a method called double hashing, you only need two hash
-              functions to simulate the behaviour of an arbitrary number.
-            </p>
-          </aside>
-        </section>
-
-        <section>
           <p>
             <i>
               g<sub>i</sub>(x) = h<sub>1</sub>(x) + ih<sub>2</sub>(x) + i<sup
