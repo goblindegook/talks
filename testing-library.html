@@ -23,7 +23,7 @@
           <p>&nbsp;</p>
           <p>&nbsp;</p>
           <hr />
-          <p>HackYourFuture Copenhagen · November 20, 2020</p>
+          <p>NewStore · August 11, 2020</p>
         </section>
 
         <section>
@@ -136,7 +136,7 @@
 
         <section>
           <ul class="emoji">
-            <li data-emoji="💔">Testing only via the browser.</li>
+            <li data-emoji="💔">Testing only with the browser.</li>
             <li data-emoji="💔">Testing implementation details.</li>
           </ul>
 
@@ -442,11 +442,11 @@
           <pre><code data-trim data-noescape data-line-numbers="1,5-6">
             <script type="text/template">
               import { render, screen } from '@testing-library/react'
-              import Component from './Component.jsx'
+              import Component from './Component'
 
               test('show the name', () => {
                 render(<Component name='Test Name' />)
-                screen.getByText(/Test Name/)
+                expect(screen.getByText(/Test Name/)).toBeInTheDocument()
               })
 						</script>
 					</code></pre>
@@ -464,7 +464,7 @@
 
               test('show the name', () => {
                 document.innerHTML = render({ name: 'Test Name' })
-                screen.getByText(/Test Name/)
+                expect(screen.getByText(/Test Name/)).toBeInTheDocument()
               })
 						</script>
 					</code></pre>
@@ -533,11 +533,11 @@
         <section>
           <h3>Frameworks</h3>
           <ul>
-            <li>Angular</li>
             <li>React (Native)</li>
+            <li>Vue</li>
+            <li>Angular</li>
             <li>Preact</li>
             <li>Svelte</li>
-            <li>Vue</li>
           </ul>
         </section>
 
@@ -579,7 +579,7 @@
               write them.
             </p>
             <p>
-              More thnan a library, it perfectly embodies a philosophy of
+              More than a library, it perfectly embodies a philosophy of
               testing.
             </p>
             <p>

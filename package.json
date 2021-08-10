@@ -15,11 +15,12 @@
   },
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^7.0.1",
+    "gulp-autoprefixer": "^8.0.0",
     "gulp-clean-css": "^4.2.0",
     "gulp-connect": "^5.7.0",
-    "gulp-sass": "^4.0.2",
-    "yargs": "^16.1.0"
+    "gulp-sass": "^5.0.0",
+    "sass": "^1.37.5",
+    "yargs": "^17.1.0"
   },
   "browserslist": "> 0.5%, IE 11, not dead"
 }
